@@ -1,5 +1,6 @@
 // pages/index.tsx
 import Head from 'next/head';
+import Link from 'next/link';
 
 export default function Home() {
   return (
@@ -37,12 +38,12 @@ export default function Home() {
         </div>
 
         <div className="mt-16 flex gap-4">
-          <a href="#" className="px-6 py-3 bg-neutral-100 text-neutral-900 font-bold rounded hover:bg-neutral-200 transition">
+          <Link href="/whitepaper" className="px-6 py-3 bg-neutral-100 text-neutral-900 font-bold rounded hover:bg-neutral-200 transition">
             Read Whitepaper
-          </a>
-          <a href="#" className="px-6 py-3 border border-neutral-700 rounded hover:border-orange-500 transition">
+          </Link>
+          <Link href="/contract" className="px-6 py-3 border border-neutral-700 rounded hover:border-orange-500 transition">
             View Contract
-          </a>
+          </Link>
         </div>
       </main>
 
