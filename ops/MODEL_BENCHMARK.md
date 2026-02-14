@@ -15,6 +15,20 @@
 
 *\*Estimates vary by provider.*
 
+## Empirical Benchmark (Verified 2026-02-14)
+We spawned sub-agents to test code generation (TypeScript CSV Parser).
+
+1.  **DeepSeek V3 (`openrouter/deepseek/deepseek-chat`):**
+    *   **Time:** 11s
+    *   **Cost:** ~10k tokens (Input context + Output).
+    *   **Quality:** Perfect (Correct handling of quotes/newlines, good variable naming).
+    *   **Verdict:** **APPROVED** for Layer 2.
+
+2.  **Qwen 2.5 72B (`openrouter/qwen...`):**
+    *   **Time:** 7s
+    *   **Quality:** Good (Manual character loop).
+    *   **Verdict:** Strong backup.
+
 ## Recommendation: The "DeepSeek Switch"
 
 1.  **Primary Driver:** Switch default agent model to **DeepSeek V3** (`openrouter/deepseek/deepseek-chat`).
