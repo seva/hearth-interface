@@ -11,7 +11,7 @@
 | **DeepSeek V3** | SOTA Value | $0.14 | $0.28 | **Ultra High** |
 | **Qwen 2.5 72B** | Coding | $0.35 | $0.40 | High |
 | **Llama 3 70B** | Standard | $0.23 | $0.40 | Medium |
-| **Gemini Flash 2** | Fast | $0.10 | $0.40 | High |
+| **Gemini Flash 2** | Fast | $0.10 | $0.40 | Medium (Low Code IQ) |
 
 *\*Estimates vary by provider.*
 
