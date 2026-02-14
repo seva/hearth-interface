@@ -1,33 +1,50 @@
-# Dependencies
-node_modules
-.pnp
-.pnp.js
-
-# Testing
-.coverage
-.rp-juli
-coverage
-
-# Next.js
-/.next/
-/out/
-
-# Build
-/build
-/dist
-
-# Misc
-.DS_Store
-*.pem
-
-# Ops
+# Secrets
+/KEYS.md
+/.env
 .env
-.env.local
-.env.development.local
-.env.test.local
-.env.production.local
+/openclaw.json
 
-# Debug
+# Logs (Global)
+*.log
 npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
+
+# Memory (Root)
+/MEMORY.md
+/memory/
+/AGENTS.md
+/SOUL.md
+/TOOLS.md
+/USER.md
+/IDENTITY.md
+/IDENTITY_DOSSIER.md
+/HEARTBEAT.md
+/BOOTSTRAP.md
+/RESEARCH_PLAN.md
+/STRATEGY.md
+
+# Sensitive (Root)
+/HEARTH_OPSEC_SETUP.md
+/HEARTH_SS4_FILLED.pdf
+*.pdf
+
+# Deps (Global)
+node_modules/
+dist/
+out/
+coverage/
+.DS_Store
+Thumbs.db
+
+# Root Utils
+/scripts/
+/*.ps1
+/*.py
+/fill_ss4.js
+/list_pdf_fields.js
+/patch-qwen-context.ps1
+
+# Protocol Specific
+/protocol/cache/
+/protocol/artifacts/
+/protocol/node_modules/
+/protocol/.env

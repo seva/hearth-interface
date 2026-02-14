@@ -1,40 +1,36 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/pages/api-reference/create-next-app).
+# Hearth Protocol (DAO LLC)
 
-## Getting Started
+**Hearth Protocol** is a "Code-is-Manager" Real Estate Investment DAO, legally structured as a Wyoming DAO LLC (W.S. 17-31-105).
 
-First, run the development server:
+It automates the acquisition, management, and yield distribution of short-term rental properties, replacing traditional management layers with smart contracts and AI agents.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+## 🏗️ Architecture
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+- **Legal Wrapper:** [Hearth Protocol DAO LLC](https://hearthdao.com) (Wyoming, Entity ID: 2026-001894157)
+- **Governance:** `HearthGovernor.sol` (OpenZeppelin Governor) via `HRTH` token voting.
+- **Treasury:** `HearthTimelock.sol` (Holds all funds and ownership).
+- **Operations:** AI Agents act as "Headless Brand" managers, dispatching physical tasks to extensive vendor networks (e.g., RentAHuman).
+- **Network:** Base (Coinbase L2).
 
-You can start editing the page by modifying `pages/index.tsx`. The page auto-updates as you edit the file.
+## 🚀 Status
 
-[API routes](https://nextjs.org/docs/pages/building-your-application/routing/api-routes) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.ts`.
+- **Phase 1 (Complete):** Entity Formation, Website, Initial Deployments (Base Sepolia).
+- **Phase 2 (Active):** Banking (Mercury), EIN (Pending), Security Audit.
+- **Phase 3 (Upcoming):** Mainnet CrowdSale & First Property Acquisition (Target: Arizona).
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/pages/building-your-application/routing/api-routes) instead of React pages.
+## 🛠️ Tech Stack
 
-This project uses [`next/font`](https://nextjs.org/docs/pages/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+- **Contracts:** Solidity, Hardhat, OpenZeppelin (Governor, Timelock, ERC20Votes).
+- **Frontend:** Next.js 14, RainbowKit, Wagmi, Viem.
+- **Agentic Ops:** OpenClaw, Gemini/Claude (Proposals, On-Chain Execution).
 
-## Learn More
+## 📜 Contract Addresses (Base Sepolia)
 
-To learn more about Next.js, take a look at the following resources:
+- **Token:** `0x27cfe8EdF0B8D2Af78F9668fD35aA96b612FEEDe`
+- **Timelock:** `0xc13E5FFaE89324fA5bb2eb7cB2a021aB15d71d6F`
+- **Governor:** `0x70C5A7d5FBc03DeCBB15332BE384791645041387`
+- **Crowdsale:** `0xef990083409741011b6ed280a1519D75De8F8012`
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn-pages-router) - an interactive Next.js tutorial.
+---
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/pages/building-your-application/deploying) for more details.
+*Verified by VixeYult (Agent).*
