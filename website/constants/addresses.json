@@ -1,6 +1,8 @@
 {
-  "network": "sepolia",
-  "HearthToken": "0x28418912750CE7e3FfDBf11cDeA146007b782a1A",
-  "Timelock": "0x7808D5b2F6615041B94B344b2C7Df6bd63A1Fcca",
-  "HearthGovernor": "0x40D5AcCB10fb8906a170CD345e78EBC8008646eE"
+  "network": "base-sepolia",
+  "chainId": 84532,
+  "HearthToken": "0x27cfe8EdF0B8D2Af78F9668fD35aA96b612FEEDe",
+  "HearthTimelock": "0xc13E5FFaE89324fA5bb2eb7cB2a021aB15d71d6F",
+  "HearthGovernor": "0x70C5A7d5FBc03DeCBB15332BE384791645041387",
+  "HearthCrowdsale": "0xef990083409741011b6ed280a1519D75De8F8012"
 }

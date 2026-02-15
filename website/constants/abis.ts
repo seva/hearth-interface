@@ -14,3 +14,12 @@ export const HearthGovernorABI = [
   { inputs: [{ internalType: "uint256", name: "proposalId", type: "uint256" }], name: "state", outputs: [{ internalType: "uint8", name: "", type: "uint8" }], stateMutability: "view", type: "function" },
   { inputs: [{ internalType: "uint256", name: "proposalId", type: "uint256" }], name: "proposalVotes", outputs: [{ internalType: "uint256", name: "againstVotes", type: "uint256" }, { internalType: "uint256", name: "forVotes", type: "uint256" }, { internalType: "uint256", name: "abstainVotes", type: "uint256" }], stateMutability: "view", type: "function" }
 ] as const;
+
+// HearthCrowdsale ABI
+export const CROWDSALE_ABI = [
+  { inputs: [], name: "rate", outputs: [{ internalType: "uint256", name: "", type: "uint256" }], stateMutability: "view", type: "function" },
+  { inputs: [], name: "wallet", outputs: [{ internalType: "address", name: "", type: "address" }], stateMutability: "view", type: "function" },
+  { inputs: [], name: "weiRaised", outputs: [{ internalType: "uint256", name: "", type: "uint256" }], stateMutability: "view", type: "function" },
+  { inputs: [], name: "token", outputs: [{ internalType: "contract IERC20", name: "", type: "address" }], stateMutability: "view", type: "function" },
+  { inputs: [], name: "usdc", outputs: [{ internalType: "contract IERC20", name: "", type: "address" }], stateMutability: "view", type: "function" }
+] as const;
