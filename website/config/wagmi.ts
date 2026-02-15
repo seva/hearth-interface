@@ -1,9 +1,15 @@
-import { getDefaultConfig } from '@rainbow-me/rainbowkit';
-import { baseSepolia, hardhat } from 'wagmi/chains';
+import { base, baseSepolia } from 'viem/chains';
+import { createConfig, http } from 'wagmi';
+import { getDefaultConfig, RainbowKitProvider } from '@rainbow-me/rainbowkit';
 
-export const config = getDefaultConfig({
-  appName: 'Hearth Protocol',
-  projectId: '3fbb6bba6f1de962d911bb5b5c9dbaef', // Public testing ID, replace purely for prod
-  chains: [hardhat, baseSepolia],
-  ssr: true,
-});
+export const config = createConfig(
+  getDefaultConfig({
+    appName: 'My App',
+    projectId: process.env.NEXT_PUBLIC_WALLETCONNECT_PROJECT_ID,
+    chains: [base, baseSepolia],
+    transports: {
+      [base.id]: http(),
+      [baseSepolia.id]: http(),
+    },
+  })
+);
