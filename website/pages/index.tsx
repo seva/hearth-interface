@@ -1,23 +1,21 @@
-import { ConnectButton } from '@rainbow-me/rainbowkit';
-import { useCrowdsale } from '../hooks/useCrowdsale';
-import { formatEther } from 'viem';
+import type { NextPage } from 'next';
+import Head from 'next/head';
+import { BuyWidget } from '../components/BuyWidget';
 
-export default function Home() {
-  const { rate, weiRaised, isLoading } = useCrowdsale();
-
+const Home: NextPage = () => {
   return (
     <div>
-      <ConnectButton />
-      
-      {isLoading ? (
-        <p>Loading crowdsale data...</p>
-      ) : (
-        <div>
-          <p>Rate: {rate.data ? formatEther(rate.data) : 'N/A'} HRTH/USDC</p>
-          <p>Raised: {weiRaised.data ? formatEther(weiRaised.data) : 'N/A'} USDC</p>
-          <p>Contract Logic: Active</p>
-        </div>
-      )}
+      <Head>
+        <title>Hearth Crowdsale</title>
+        <meta name="description" content="Buy Hearth tokens" />
+      </Head>
+
+      <main>
+        <h1>Welcome to Hearth Crowdsale</h1>
+        <BuyWidget />
+      </main>
     </div>
   );
-}
+};
+
+export default Home;
