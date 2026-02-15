@@ -1,7 +1,7 @@
 import { ethers } from "hardhat";
 import { expect } from "chai";
 import { loadFixture } from "@nomicfoundation/hardhat-toolbox/network-helpers";
-import { time } from "@nomicfoundation/hardhat-toolbox/network-helpers";
+import { time, mine } from "@nomicfoundation/hardhat-toolbox/network-helpers";
 
 describe("HearthGovernor", function () {
   async function deployContracts() {
@@ -18,6 +18,13 @@ describe("HearthGovernor", function () {
     // Deploy HearthGovernor
     const HearthGovernor = await ethers.getContractFactory("HearthGovernor");
     const governor = await HearthGovernor.deploy(token.getAddress(), timelock.getAddress());
+
+    // Grant EXECUTOR_ROLE to Governor
+    const EXECUTOR_ROLE = await timelock.EXECUTOR_ROLE();
+    await timelock.grantRole(EXECUTOR_ROLE, await governor.getAddress());
+
+    // Fund the timelock with tokens (Fix for ERC20InsufficientBalance)
+    await token.transfer(await timelock.getAddress(), 5000);
 
     return { token, timelock, governor, deployer, otherUser };
   }
@@ -45,24 +52,25 @@ describe("HearthGovernor", function () {
     const proposeReceipt = await proposeTx.wait();
     const proposalId = proposeReceipt.logs[0].args.proposalId;
 
-    // 4. Advance time past voting delay
-    await time.increase(await governor.votingDelay());
+    // 4. Advance blocks past voting delay (now in blocks)
+    const votingDelayBlocks = await governor.votingDelay();
+    await mine(votingDelayBlocks);
 
     // 5. Vote 'For'
     await governor.castVote(proposalId, 1); // 1 = For
 
-    // 6. Advance time past voting period
-    // Voting Period is 1 week (604800 seconds).
-    await time.increase(604801); 
+    // Mine a block to ensure vote is recorded
+    await mine(1);
 
-    // Mine a block to ensure state transition
-    await network.provider.send("evm_mine");
+    // 6. Advance blocks past voting period (now in blocks)
+    const votingPeriodBlocks = await governor.votingPeriod();
+    await mine(votingPeriodBlocks + 1n); 
 
     // 7. Queue proposal
     const descriptionHash = ethers.keccak256(ethers.toUtf8Bytes("Transfer 1000 tokens"));
     await governor.queue([await token.getAddress()], [0], [transferCalldata], descriptionHash);
 
-    // 8. Advance time past timelock delay
+    // 8. Advance time past timelock delay (still in seconds)
     await time.increase(3600); // timelock delay
 
     // 9. Execute proposal
