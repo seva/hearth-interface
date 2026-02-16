@@ -6,7 +6,7 @@ import "@openzeppelin/contracts/token/ERC20/extensions/ERC20Permit.sol";
 import "@openzeppelin/contracts/token/ERC20/extensions/ERC20Votes.sol";
 
 contract HearthToken is ERC20, ERC20Permit, ERC20Votes {
-    constructor() ERC20("Hearth Protocol", "HRTH") ERC20Permit("Hearth Protocol") {
+    constructor() ERC20("Hearth DAO", "HRTH") ERC20Permit("Hearth DAO") {
         _mint(msg.sender, 10_000_000 * 10 ** decimals()); 
     }
 

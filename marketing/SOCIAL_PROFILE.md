@@ -16,7 +16,7 @@
 > 🌐 hearthdao.com
 
 **Pinned Post:**
-> 🏛️ Introducing Hearth DAO LLC.
+> 🏛️ Introducing Hearth Protocol DAO LLC.
 > 
 > We are building the first fully autonomous real estate portfolio.
 > No property managers. No manual leases. Just smart contracts and agents.
@@ -31,7 +31,7 @@
 ## 2. Farcaster / Warpcast (`/hearth`)
 
 **Channel Description:**
-> The HQ of Hearth Protocol. Autonomous property management on Base. Building the first Headless REIT.
+> The HQ of Hearth DAO. Autonomous property management on Base. Building the first Headless REIT.
 
 **Cast:**
 > Hello World. 🌍

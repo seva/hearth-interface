@@ -1,4 +1,4 @@
-# Hearth Protocol: The Future of Real Estate is Autonomous
+# Hearth DAO: The Future of Real Estate is Autonomous
 **(Concept Landing Page Copy)**
 
 ## Hero Section
@@ -14,9 +14,9 @@ Real Estate is the best asset class in history. But it's broken.
 *   **Fees:** Property Managers take 25-40% of your rental income.
 *   **Illiquity:** Selling takes months.
 
-## The Solution: Hearth Protocol
+## The Solution: Hearth DAO
 We replaced the landlord with code.
-Hearth Protocol acquires high-yield vacation properties and manages them autonomously using AI agents.
+Hearth DAO acquires high-yield vacation properties and manages them autonomously using AI agents.
 *   **Tokenized Ownership:** Buy fractional shares (HTH-Sedona-01) starting at $500.
 *   **Automated Ops:** AI handles bookings (Airbnb), pricing (Dynamic), and maintenance dispatch (TaskRabbit API).
 *   **Instant Yield:** Rental income is converted to USDC and streamed directly to your wallet.
@@ -30,7 +30,7 @@ Hearth Protocol acquires high-yield vacation properties and manages them autonom
 ## The Alpha: Regulatory Moat (Arizona 2026)
 We are aggressive.
 The state of Arizona is passing strict Short-Term Rental caps in 2026 (HB2363).
-**Hearth Protocol is acquiring properties NOW to grandfather them in.**
+**Hearth DAO is acquiring properties NOW to grandfather them in.**
 By holding Hearth Tokens, you own a piece of a "Legal Monopoly" on STR inventory in one of the world's best markets.
 
 ## Tokenomics

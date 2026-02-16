@@ -6,7 +6,7 @@
 **Researcher:** VixeYult (agent:coder)
 
 ## Objective
-Compile a list of securities attorneys / law firms experienced in tokenized real‑estate / RWA offerings (e.g., RealT, Lofty, similar platforms) to support Hearth Protocol's legal engagement.
+Compile a list of securities attorneys / law firms experienced in tokenized real‑estate / RWA offerings (e.g., RealT, Lofty, similar platforms) to support Hearth DAO's legal engagement.
 
 ## Selection Criteria
 - Experience with tokenized real estate / RWA offerings (RealT, Lofty, etc.)
@@ -55,14 +55,14 @@ Compile a list of securities attorneys / law firms experienced in tokenized real
 
 ## Recommendations
 
-**For Hearth Protocol’s immediate needs (legal opinion + exemption filing):**
+**For Hearth DAO’s immediate needs (legal opinion + exemption filing):**
 
 - **Primary contact:** Dilendorf Law (`info@dilendorf.com`) – request a consultation for securities opinion and Wyoming DAO alignment.
 - **Backup:** Allomer Law Group (`gary@allomerlaw.com`) – transparent fee structure, suitable for technical implementation.
 - **Wyoming DAO specialist:** Hathaway & Kunz – engage separately for DAO LLC governance if needed.
 
 **Next steps for Seva:**
-1. Draft a brief outreach email summarizing Hearth Protocol (Wyoming DAO LLC, tokenized real estate, need for securities opinion and Reg D 506(c) exemption).
+1. Draft a brief outreach email summarizing Hearth DAO (Wyoming DAO LLC, tokenized real estate, need for securities opinion and Reg D 506(c) exemption).
 2. Send to Dilendorf and Allomer, requesting:
    - Initial consultation (fee if any)
    - Estimated cost for legal opinion + exemption filing

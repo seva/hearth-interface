@@ -6,15 +6,15 @@ export default function Home() {
   return (
     <div className="min-h-screen bg-neutral-900 text-neutral-100 font-sans">
       <Head>
-        <title>Hearth Protocol | Autonomous Real Estate</title>
-        <meta name="description" content="Hearth Protocol: Algorithmically managed real estate DAO. Zero-profit management, automated yield distribution." />
+        <title>Hearth DAO | Autonomous Real Estate</title>
+        <meta name="description" content="Hearth DAO: Algorithmically managed real estate DAO. Zero-profit management, automated yield distribution." />
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
       {/* Hero Section */}
       <main className="flex flex-col items-center justify-center min-h-[80vh] px-4 text-center">
         <h1 className="text-6xl font-bold tracking-tighter mb-4 bg-clip-text text-transparent bg-gradient-to-r from-orange-400 to-red-600">
-          Hearth Protocol
+          Hearth DAO
         </h1>
         <p className="text-xl text-neutral-400 max-w-2xl mb-8">
           The first legally compliant, algorithmically managed Real Estate DAO.

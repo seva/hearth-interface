@@ -1,5 +1,5 @@
 {
-  "name": "hearth-protocol",
+  "name": "hearth-dao",
   "version": "1.0.0",
   "description": "Smart Contracts for Hearth Protocol DAO LLC",
   "scripts": {
@@ -7,6 +7,7 @@
   },
   "dependencies": {
     "@openzeppelin/contracts": "^5.0.0",
+    "@safe-global/protocol-kit": "^6.1.2",
     "hardhat": "^2.19.0"
   },
   "devDependencies": {

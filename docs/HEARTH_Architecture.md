@@ -1,8 +1,8 @@
-# Hearth Protocol: The Autonomous Cycle
+# Hearth DAO: The Autonomous Cycle
 
 ```mermaid
 graph TD
-    User([Investor]) -->|Buy Token| DAO{Hearth DAO LLC}
+    User([Investor]) -->|Buy Token| DAO{Hearth Protocol DAO LLC}
     DAO -->|Acquire Property| Property[Sedona Cabin]
     
     subgraph Ops [The Operator AI]

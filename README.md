@@ -1,6 +1,6 @@
-# Hearth Protocol (DAO LLC)
+# Hearth DAO (DAO LLC)
 
-**Hearth Protocol** is a "Code-is-Manager" Real Estate Investment DAO, legally structured as a Wyoming DAO LLC (W.S. 17-31-105).
+**Hearth DAO** is a "Code-is-Manager" Real Estate Investment DAO, legally structured as a Wyoming DAO LLC (W.S. 17-31-105).
 
 It automates the acquisition, management, and yield distribution of short-term rental properties, replacing traditional management layers with smart contracts and AI agents.
 

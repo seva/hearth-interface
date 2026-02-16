@@ -14,14 +14,14 @@ export default function Whitepaper() {
         </Link>
 
         <article className="prose prose-invert prose-orange max-w-none">
-          <h1 className="text-4xl font-bold mb-2">Hearth Protocol Whitepaper</h1>
+          <h1 className="text-4xl font-bold mb-2">Hearth DAO Whitepaper</h1>
           <div className="text-neutral-500 mb-8 text-sm">
             Status: Draft v0.1 • Date: Feb 12, 2026
           </div>
 
           <h2 className="text-2xl font-bold mt-8 mb-4">Abstract</h2>
           <p className="text-neutral-300 leading-relaxed mb-6">
-            Hearth Protocol is the world's first <strong>Autonomous Real Estate Investment Trust</strong>. By combining the legal framework of a Wyoming DAO LLC with AI-driven property management, Hearth removes the human friction from real estate investing.
+            Hearth DAO is the world's first <strong>Autonomous Real Estate Investment Trust</strong>. By combining the legal framework of a Wyoming DAO LLC with AI-driven property management, Hearth removes the human friction from real estate investing.
           </p>
           <p className="text-neutral-300 leading-relaxed mb-6">
             Investors purchase <strong>Hearth Tokens</strong> (HTH) which represent fractional ownership in high-yield vacation properties. An AI Agent (The Operator) autonomously manages bookings, dynamic pricing, guest communication, and maintenance dispatch via APIs. Rental income is automatically converted to stablecoins (USDC) and distributed to token holders instantly.

@@ -1,4 +1,4 @@
-# Hearth Protocol: Launch Comms Strategy
+# Hearth DAO: Launch Comms Strategy
 **Date:** Feb 12, 2026
 **Target:** Crypto Twitter / Farcaster / LinkedIn
 **Tone:** Bold, Technical, Proactive.
@@ -13,7 +13,7 @@ Real Estate is broken.
 - You can't sell for months.
 
 It's time to replace the landlord with code.
-Introducing **Hearth Protocol** ($HTH).
+Introducing **Hearth DAO** ($HTH).
 The world's first AI-Managed Real Estate DAO.
 [Link to Whitepaper]
 
@@ -41,7 +41,7 @@ This isn't just a JPEG. It's a Deed.
 **Headline:** Unlocking the $2T Vacation Rental Asset Class with Autonomous Ops.
 
 **Body:**
-Excited to announce **Hearth Protocol**, a new venture combining legal engineering (Wyoming DAO LLC) with AI operational efficiency.
+Excited to announce **Hearth DAO**, a new venture combining legal engineering (Wyoming DAO LLC) with AI operational efficiency.
 We are solving the liquidity crisis in real estate by tokenizing high-performing assets and managing them autonomously.
 The goal: Turn a $1M chaotic liability into 1,000 liquid, yield-bearing assets.
 Check out the whitepaper: [Link]

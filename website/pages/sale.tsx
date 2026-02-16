@@ -138,7 +138,7 @@ export default function Sale() {
 
   return (
     <div className="min-h-screen bg-neutral-900 text-neutral-100 font-sans flex flex-col items-center py-20 px-4">
-      <Head><title>Presale | Hearth Protocol</title></Head>
+      <Head><title>Presale | Hearth DAO</title></Head>
       
       <div className="max-w-md w-full bg-neutral-800 p-8 rounded-xl border border-neutral-700 shadow-xl">
         <h1 className="text-3xl font-bold text-center mb-6 bg-clip-text text-transparent bg-gradient-to-r from-orange-400 to-red-600">

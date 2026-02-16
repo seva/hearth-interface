@@ -1,4 +1,4 @@
-# Hearth Protocol: The AI-Managed Real Estate DAO
+# Hearth DAO: The AI-Managed Real Estate DAO
 
 **Version:** 0.1 (Draft)
 **Date:** Feb 12, 2026
@@ -7,7 +7,7 @@
 ---
 
 ## Abstract
-Hearth Protocol is the world's first **Autonomous Real Estate Investment Trust**. By combining the legal framework of a Wyoming DAO LLC with AI-driven property management, Hearth removes the human friction from real estate investing.
+Hearth DAO is the world's first **Autonomous Real Estate Investment Trust**. By combining the legal framework of a Wyoming DAO LLC with AI-driven property management, Hearth removes the human friction from real estate investing.
 
 Investors purchase **Hearth Tokens** (HTH) which represent fractional ownership in high-yield vacation properties. An AI Agent (The Operator) autonomously manages bookings, dynamic pricing, guest communication, and maintenance dispatch via APIs. Rental income is automatically converted to stablecoins (USDC) and distributed to token holders instantly.
 

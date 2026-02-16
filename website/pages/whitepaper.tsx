@@ -14,14 +14,14 @@ export default function Whitepaper() {
         </Link>
 
         <article className="prose prose-invert prose-orange max-w-none">
-          <h1 className="text-4xl font-bold mb-2">Hearth DAO LLC Whitepaper</h1>
+          <h1 className="text-4xl font-bold mb-2">Hearth Protocol DAO LLC Whitepaper</h1>
           <div className="text-neutral-500 mb-8 text-sm">
             Status: Draft v0.3 • Date: Feb 14, 2026 • Legal Entity ID: 2026-001894157 (WY)
           </div>
 
           <h2 className="text-2xl font-bold mt-8 mb-4">Abstract</h2>
           <p className="text-neutral-300 leading-relaxed mb-6">
-            Hearth Protocol is an <strong>Autonomous Real Estate Investment DAO</strong> structured as a member-managed Wyoming DAO LLC.
+            Hearth DAO is an <strong>Autonomous Real Estate Investment DAO</strong> structured as a member-managed Wyoming DAO LLC.
           </p>
           <p className="text-neutral-300 leading-relaxed mb-6">
             By delegating operational decisions to smart contracts ("Code-is-Manager") and physical execution to AI agents, Hearth removes the overhead of traditional property management. The DAO acquires properties, collects rental income via on-chain payments, and distributes yield directly to its treasury and members.
