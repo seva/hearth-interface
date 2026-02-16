@@ -1,0 +1,8 @@
+{
+  "models": [
+    { "id": "flash", "win_rate": 1.0, "tasks_won": 0, "last_updated": "2026-02-16T16:25:00Z" },
+    { "id": "ds", "win_rate": 1.0, "tasks_won": 0, "last_updated": "2026-02-16T16:25:00Z" },
+    { "id": "gemini", "win_rate": 1.0, "tasks_won": 0, "last_updated": "2026-02-16T16:25:00Z" }
+  ],
+  "auctions": []
+}
