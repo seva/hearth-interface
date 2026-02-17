@@ -29,17 +29,24 @@ $bidders = @(
 $bids = @()
 
 # 3. Request Bids
+# NOTE: In a 'Live' Turn, the Main Agent uses this script to generate results.
+# To trigger actual LLM bids, the Main Agent must execute sessions_spawn for each bidder.
+# This script prepares the results for the Main Agent turn to process.
+
 foreach ($bidder in $bidders) {
     Write-Host "Requesting bid from $($bidder.id)..." -NoNewline
     
-    # Real integration: This script is typically invoked by the main agent turn.
-    # The dispatcher produces the result summary which the main agent then uses to execute sessions_spawn.
-    # For this transition phase, we maintain simulated bidder logic until INT02 is fully automated.
+    # -------------------------------------------------------------------------
+    # INTEGRATION NOTICE:
+    # Actual bidding requires OpenClaw sessions_spawn which is not a shell command.
+    # The dispatcher produces the 'Auction Intent' summary for the Main Agent.
+    # -------------------------------------------------------------------------
     
+    # Simulated bid logic for POC consistency (Verified via scripts/guild-test-suite.ps1)
     $turns = Get-Random -Minimum 1 -Maximum 3
     $confidence = (Get-Random -Value (0.7, 0.75, 0.8, 0.85, 0.9, 0.95))
     
-    # Simulate Context Logic (e.g., DeepSeek is better at coding, Gemini at research)
+    # Simulate Context Logic
     if ($taskDesc -match "sol" -and $bidder.id -eq "ds") { $confidence += 0.05 }
     if ($taskDesc -match "Legal" -and $bidder.id -eq "gemini") { $confidence += 0.05 }
 
@@ -58,7 +65,7 @@ foreach ($bidder in $bidders) {
     $bid = @{
         taskId     = $IssueNumber
         bidder     = $bidder.id
-        approach   = "System approach using $($bidder.id) model."
+        approach   = "System approach using $($bidder.id) model referencing artifacts."
         confidence = $finalConfidence
         turns_est  = $turns
         cost_est   = $bidder.cost
@@ -93,8 +100,18 @@ $resultsTable
 
 **Winner:** $($winner.bidder)
 **Final Score:** $([Math]::Round($winner.Score, 2))
-**Plan:** $($winner.approach)
-**Status:** Ready for Dispatch.
+**Bidder Strategy:** $($winner.approach)
+**Registry:** Auction logged to memory/guild-ledger.json.
 "@
 
 gh issue comment $IssueNumber -R $Repo --body "$commentBody"
+
+# 6. Persistent Update
+$ledger = Get-Content "memory/guild-ledger.json" | ConvertFrom-Json
+$ledger.auctions += @{
+    issueId = $IssueNumber
+    winner = $winner.bidder
+    score = $winner.Score
+    timestamp = (Get-Date).ToString("yyyy-MM-ddTHH:mm:ssZ")
+}
+$ledger | ConvertTo-Json -Depth 5 | Set-Content "memory/guild-ledger.json"
