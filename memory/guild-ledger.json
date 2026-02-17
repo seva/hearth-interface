@@ -31,6 +31,18 @@
                          "timestamp":  "2026-02-16T21:28:54Z",
                          "score":  6.0000000000000009,
                          "winner":  "flash"
+                     },
+                     {
+                         "issueId":  62,
+                         "timestamp":  "2026-02-16T22:58:55Z",
+                         "score":  1,
+                         "winner":  "flash"
+                     },
+                     {
+                         "issueId":  62,
+                         "timestamp":  "2026-02-16T22:59:08Z",
+                         "score":  6.0000000000000009,
+                         "winner":  "flash"
                      }
                  ]
 }

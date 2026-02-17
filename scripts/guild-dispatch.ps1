@@ -34,14 +34,14 @@ foreach ($bidder in $bidders) {
     
     # -------------------------------------------------------------------------
     # INTEGRATION NOTICE:
-    # Bidding requires OpenClaw sessions_spawn. In automated script execution,
-    # the orchestration turn handles the spawning. This script produces the
-    # bidding intent and verifies logic.
+    # Actual bidding requires OpenClaw sessions_spawn.
     # -------------------------------------------------------------------------
     
     # Simulated bid logic for POC consistency (Verified via scripts/guild-test-suite.ps1)
-    $turns = Get-Random -Minimum 1 -Maximum 3
-    $confidence = (Get-Random -Value (0.7, 0.75, 0.8, 0.85, 0.9, 0.95))
+    $confidenceOptions = @(0.7, 0.75, 0.8, 0.85, 0.9, 0.95)
+    $confidence = $confidenceOptions[(Get-Random -Minimum 0 -Maximum $confidenceOptions.Count)]
+    $turnsOptions = @(1, 2, 3)
+    $turns = $turnsOptions[(Get-Random -Minimum 0 -Maximum $turnsOptions.Count)]
     
     # Simulate Context Logic
     if ($taskDesc -match "sol" -and $bidder.id -eq "ds") { $confidence += 0.05 }
@@ -62,7 +62,7 @@ foreach ($bidder in $bidders) {
     $bid = @{
         taskId     = $IssueNumber
         bidder     = $bidder.id
-        approach   = "System strategy for #$IssueNumber referencing artifacts like $workspaceFiles"
+        approach   = "System approach using $($bidder.id) model referencing artifacts."
         confidence = $finalConfidence
         turns_est  = $turns
         cost_est   = $bidder.cost
@@ -99,19 +99,24 @@ $resultsTable
 
 **Winner:** $($winner.bidder)
 **Final Score:** $finalScore
-**Plan Summary:** $($winner.approach)
-**Context Proof:** ✅ Verified workspace file injection.
+**Bidder Strategy:** $($winner.approach)
 **Registry:** Auction result persisted in memory/guild-ledger.json.
 "@
 
 gh issue comment $IssueNumber -R $Repo --body "$commentBody"
 
 # 6. Persistent Update
-$ledger = Get-Content "memory/guild-ledger.json" | ConvertFrom-Json
+# Ensure path exists before Reading
+$ledgerPath = "memory/guild-ledger.json"
+if (-Not (Test-Path $ledgerPath)) {
+    New-Item -Path $ledgerPath -ItemType File -Value '{"models": [], "auctions": []}' -Force
+}
+
+$ledger = Get-Content $ledgerPath | ConvertFrom-Json
 $ledger.auctions += @{
     issueId = $IssueNumber
     winner = $winner.bidder
     score = $winner.Score
     timestamp = (Get-Date).ToString("yyyy-MM-ddTHH:mm:ssZ")
 }
-$ledger | ConvertTo-Json -Depth 5 | Set-Content "memory/guild-ledger.json"
+$ledger | ConvertTo-Json -Depth 5 | Set-Content $ledgerPath
