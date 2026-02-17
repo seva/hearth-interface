@@ -17,6 +17,8 @@ $groundTruth = @{
 }
 
 $results = @()
+$matchesCount = 0
+$totalCount = 0
 
 foreach ($id in $groundTruth.Keys) {
     Write-Host "Auditing legacy task #$id... " -NoNewline
@@ -36,19 +38,18 @@ foreach ($id in $groundTruth.Keys) {
         elseif ($mechanismPick -eq "flash") { $mechanismRole = "main" }  # main primary is flash
         
         $match = ($mechanismRole -eq $historicalAgent)
+        $totalCount++
         
         if ($match) {
             Write-Host "MATCH" -ForegroundColor Green
+            $matchesCount++
         } else {
             Write-Host "MISMATCH (Picked: $mechanismRole ($mechanismPick), Actual: $historicalAgent)" -ForegroundColor Yellow
         }
-        
-        $results += @{ id = $id; match = $match; picked = $mechanismRole; actual = $historicalAgent }
     } else {
         Write-Host "FAILED TO PARSE" -ForegroundColor Red
     }
 }
 
-$successCount = ($results | Where-Object { $_.match }).Count
-$accuracy = if ($results.Count -gt 0) { [Math]::Round($successCount / $results.Count * 100, 2) } else { 0 }
-Write-Host "--- Audit Complete. Mechanism Accuracy: $accuracy% ---" -ForegroundColor Cyan
+$accuracy = if ($totalCount -gt 0) { [Math]::Round(($matchesCount / $totalCount) * 100, 2) } else { 0 }
+Write-Host "--- Audit Complete. Mechanism Accuracy: $accuracy% ($matchesCount/$totalCount) ---" -ForegroundColor Cyan
