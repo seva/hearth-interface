@@ -32,11 +32,6 @@ $bids = @()
 foreach ($bidder in $bidders) {
     Write-Host "Requesting bid from $($bidder.id)..." -NoNewline
     
-    # -------------------------------------------------------------------------
-    # INTEGRATION NOTICE:
-    # Actual bidding requires OpenClaw sessions_spawn.
-    # -------------------------------------------------------------------------
-    
     # Simulated bid logic for POC consistency (Verified via scripts/guild-test-suite.ps1)
     $confidenceOptions = @(0.7, 0.75, 0.8, 0.85, 0.9, 0.95)
     $confidence = $confidenceOptions[(Get-Random -Minimum 0 -Maximum $confidenceOptions.Count)]
@@ -62,7 +57,7 @@ foreach ($bidder in $bidders) {
     $bid = @{
         taskId     = $IssueNumber
         bidder     = $bidder.id
-        approach   = "System approach using $($bidder.id) model referencing artifacts."
+        approach   = "System approach using $($bidder.id) model referencing artifacts like $workspaceFiles"
         confidence = $finalConfidence
         turns_est  = $turns
         cost_est   = $bidder.cost
@@ -106,7 +101,6 @@ $resultsTable
 gh issue comment $IssueNumber -R $Repo --body "$commentBody"
 
 # 6. Persistent Update
-# Ensure path exists before Reading
 $ledgerPath = "memory/guild-ledger.json"
 if (-Not (Test-Path $ledgerPath)) {
     New-Item -Path $ledgerPath -ItemType File -Value '{"models": [], "auctions": []}' -Force
@@ -119,4 +113,13 @@ $ledger.auctions += @{
     score = $winner.Score
     timestamp = (Get-Date).ToString("yyyy-MM-ddTHH:mm:ssZ")
 }
+
+# Update win counts
+foreach ($m in $ledger.models) {
+    if ($m.id -eq $winner.bidder) {
+        $m.tasks_won++
+        $m.last_updated = (Get-Date).ToString("yyyy-MM-ddTHH:mm:ssZ")
+    }
+}
+
 $ledger | ConvertTo-Json -Depth 5 | Set-Content $ledgerPath
