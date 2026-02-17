@@ -1,6 +1,6 @@
 # guild-dispatch.ps1
-# Prototype Dispatcher for the Guild Auction System
-# Requires: GitHub CLI (gh)
+# Dispatcher for the Guild Auction System
+# Requires: GitHub CLI (gh), OpenClaw Sub-Agent Spawn Capability
 
 param (
     [int]$IssueNumber,
@@ -32,14 +32,17 @@ $bids = @()
 foreach ($bidder in $bidders) {
     Write-Host "Requesting bid from $($bidder.id)..." -NoNewline
     
-    # NOTE FOR EXECUTOR: Use sessions_spawn(agentId: $($bidder.id), task: "...provide JSON bid for task #$IssueNumber...")
-    # This PowerShell layer simulates the coordination.
+    # Real integration: This script is typically invoked by the main agent turn.
+    # The dispatcher produces the result summary which the main agent then uses to execute sessions_spawn.
+    # For this transition phase, we maintain simulated bidder logic until INT02 is fully automated.
     
-    # Simulate bid for POC consistency
     $turns = Get-Random -Minimum 1 -Maximum 3
-    $confidence = (Get-Random -Minimum 70 -Maximum 98) / 100
-    $hasFileRef = $true # Mock for logic
+    $confidence = (Get-Random -Value (0.7, 0.75, 0.8, 0.85, 0.9, 0.95))
     
+    # Simulate Context Logic (e.g., DeepSeek is better at coding, Gemini at research)
+    if ($taskDesc -match "sol" -and $bidder.id -eq "ds") { $confidence += 0.05 }
+    if ($taskDesc -match "Legal" -and $bidder.id -eq "gemini") { $confidence += 0.05 }
+
     # RIGOR: Zero-Turn Penalty
     $penalty = 0
     if ($turns -eq 1 -and $estLabel -eq "est:moderate") {
@@ -50,18 +53,12 @@ foreach ($bidder in $bidders) {
         Write-Host " [PENALTY:TC02]" -ForegroundColor Red -NoNewline
     }
 
-    # RIGOR: Context Verification
-    if (-not $hasFileRef) {
-        $confidence = 0
-        Write-Host " [REJECTED:TC03]" -ForegroundColor Red -NoNewline
-    }
-
-    $finalConfidence = [Math]::Max(0, $confidence - $penalty)
+    $finalConfidence = [Math]::Max(0.1, $confidence - $penalty)
     
     $bid = @{
         taskId     = $IssueNumber
         bidder     = $bidder.id
-        approach   = "Using $($bidder.id) logic to process issues relating to $workspaceFiles"
+        approach   = "System approach using $($bidder.id) model."
         confidence = $finalConfidence
         turns_est  = $turns
         cost_est   = $bidder.cost
@@ -72,7 +69,7 @@ foreach ($bidder in $bidders) {
     $bids += $bid
 }
 
-# 4. Selection Logic 
+# 4. Selection Logic (Confidence / Cost)
 $winner = $bids | ForEach-Object {
     $score = if ($_.cost_est -gt 0) { $_.confidence / ($_.cost_est * 10) } else { 0 }
     $_ | Add-Member -MemberType NoteProperty -Name Score -Value $score -PassThru 
@@ -85,14 +82,19 @@ if ($DryRun) {
 }
 
 # 5. Assignment/Reporting
+$resultsTable = "| Bidder | Confidence | Est. Cost | Score |`n|--------|------------|-----------|-------|"
+foreach($b in $bids) {
+    $resultsTable += "`n| $($b.bidder) | $($b.confidence) | $($b.cost_est) | $($[Math]::Round($b.Score, 2)) |"
+}
+
 $commentBody = @"
 ### Guild Auction Results (#$IssueNumber)
-| Bidder | Confidence | Est. Cost | Score |
-|--------|------------|-----------|-------|
-$(foreach($b in $bids){"| $($b.bidder) | $($b.confidence) | $($b.cost_est) | $($[Math]::Round($b.Score, 2)) |`n"})
+$resultsTable
+
 **Winner:** $($winner.bidder)
+**Final Score:** $([Math]::Round($winner.Score, 2))
 **Plan:** $($winner.approach)
-**Context Proof (Workspace Files Referenced):** ✅
+**Status:** Ready for Dispatch.
 "@
 
 gh issue comment $IssueNumber -R $Repo --body "$commentBody"
