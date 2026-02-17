@@ -14,6 +14,7 @@ Write-Host "--- Guild Auction Commencing for Issue #$IssueNumber ---" -Foregroun
 $issue = gh issue view $IssueNumber -R $Repo --json title,body,labels | ConvertFrom-Json
 $taskDesc = "Title: $($issue.title)`nBody: $($issue.body)"
 $estLabel = ($issue.labels | Where-Object { $_.name -like "est:*" }).name
+$taskLabels = $issue.labels.name
 
 # RIGOR: Context Extraction (File List)
 $exclude = ".git", ".next", "dist", "node_modules", "ab-test-artifacts", "protocol/typechain-types"
@@ -32,15 +33,28 @@ $bids = @()
 foreach ($bidder in $bidders) {
     Write-Host "Requesting bid from $($bidder.id)..." -NoNewline
     
-    # Simulated bid logic for POC consistency (Verified via scripts/guild-test-suite.ps1)
+    # Simulated bid logic (Verified via scripts/guild-test-suite.ps1)
     $confidenceOptions = @(0.7, 0.75, 0.8, 0.85, 0.9, 0.95)
     $confidence = $confidenceOptions[(Get-Random -Minimum 0 -Maximum $confidenceOptions.Count)]
     $turnsOptions = @(1, 2, 3)
     $turns = $turnsOptions[(Get-Random -Minimum 0 -Maximum $turnsOptions.Count)]
     
-    # Simulate Context Logic
-    if ($taskDesc -match "sol" -and $bidder.id -eq "ds") { $confidence += 0.05 }
-    if ($taskDesc -match "Legal" -and $bidder.id -eq "gemini") { $confidence += 0.05 }
+    # --- PHASE 2: MODEL WEIGHTING ---
+    $multiplier = 1.0
+    # Technical Boost for DeepSeek/Gemini Pro
+    if ($taskLabels -contains "smart-contracts" -or $taskLabels -contains "ops" -or $taskLabels -contains "dev") {
+        if ($bidder.id -eq "ds" -or $bidder.id -eq "gemini") {
+            $multiplier = 1.5
+            Write-Host " [BOOST:TECH]" -ForegroundColor Cyan -NoNewline
+        }
+    }
+    # Strategy Boost for Gemini Pro
+    if ($taskLabels -contains "legal" -or $taskLabels -contains "marketing" -or $taskLabels -contains "product") {
+        if ($bidder.id -eq "gemini") {
+            $multiplier = 1.3
+            Write-Host " [BOOST:STRAT]" -ForegroundColor Blue -NoNewline
+        }
+    }
 
     # RIGOR: Zero-Turn Penalty
     $penalty = 0
@@ -52,7 +66,7 @@ foreach ($bidder in $bidders) {
         Write-Host " [PENALTY:TC02]" -ForegroundColor Red -NoNewline
     }
 
-    $finalConfidence = [Math]::Max(0.1, $confidence - $penalty)
+    $finalConfidence = [Math]::Max(0.1, ($confidence * $multiplier) - $penalty)
     
     $bid = @{
         taskId     = $IssueNumber
@@ -84,7 +98,7 @@ if ($DryRun) {
 $resultsTable = "| Bidder | Confidence | Est. Cost | Score |`n|--------|------------|-----------|-------|"
 foreach($b in $bids) {
     $roundScore = [Math]::Round($b.Score, 2)
-    $resultsTable += "`n| $($b.bidder) | $($b.confidence) | $($b.cost_est) | $roundScore |"
+    $resultsTable += "`n| $($b.bidder) | $([Math]::Round($b.confidence,2)) | $($b.cost_est) | $roundScore |"
 }
 
 $finalScore = [Math]::Round($winner.Score, 2)
@@ -95,7 +109,7 @@ $resultsTable
 **Winner:** $($winner.bidder)
 **Final Score:** $finalScore
 **Bidder Strategy:** $($winner.approach)
-**Registry:** Auction result persisted in memory/guild-ledger.json.
+**Registry:** Auction result persisted in memory/guild-ledger.json. (Phase 2 Model Weighting Applied)
 "@
 
 gh issue comment $IssueNumber -R $Repo --body "$commentBody"
