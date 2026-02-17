@@ -29,22 +29,13 @@ $bidders = @(
 $bids = @()
 
 # 3. Request Bids
-# NOTE: In a 'Live' Turn, the Main Agent uses this script to generate results.
-# To trigger actual LLM bids, the Main Agent must execute sessions_spawn for each bidder.
-# This script prepares the results for the Main Agent turn to process.
-
 foreach ($bidder in $bidders) {
     Write-Host "Requesting bid from $($bidder.id)..." -NoNewline
     
-    # -------------------------------------------------------------------------
-    # INTEGRATION NOTICE:
-    # Actual bidding requires OpenClaw sessions_spawn which is not a shell command.
-    # The dispatcher produces the 'Auction Intent' summary for the Main Agent.
-    # -------------------------------------------------------------------------
-    
-    # Simulated bid logic for POC consistency (Verified via scripts/guild-test-suite.ps1)
+    # Simulating confidence levels for POC
+    $confidenceOptions = @(0.7, 0.75, 0.8, 0.85, 0.9, 0.95)
+    $confidence = $confidenceOptions[(Get-Random -Minimum 0 -Maximum $confidenceOptions.Count)]
     $turns = Get-Random -Minimum 1 -Maximum 3
-    $confidence = (Get-Random -Value (0.7, 0.75, 0.8, 0.85, 0.9, 0.95))
     
     # Simulate Context Logic
     if ($taskDesc -match "sol" -and $bidder.id -eq "ds") { $confidence += 0.05 }
@@ -78,8 +69,8 @@ foreach ($bidder in $bidders) {
 
 # 4. Selection Logic (Confidence / Cost)
 $winner = $bids | ForEach-Object {
-    $score = if ($_.cost_est -gt 0) { $_.confidence / ($_.cost_est * 10) } else { 0 }
-    $_ | Add-Member -MemberType NoteProperty -Name Score -Value $score -PassThru 
+    $scoreValue = if ($_.cost_est -gt 0) { $_.confidence / ($_.cost_est * 10) } else { 0 }
+    $_ | Add-Member -MemberType NoteProperty -Name Score -Value $scoreValue -PassThru 
 } | Sort-Object Score -Descending | Select-Object -First 1
 
 if ($DryRun) {
@@ -91,15 +82,17 @@ if ($DryRun) {
 # 5. Assignment/Reporting
 $resultsTable = "| Bidder | Confidence | Est. Cost | Score |`n|--------|------------|-----------|-------|"
 foreach($b in $bids) {
-    $resultsTable += "`n| $($b.bidder) | $($b.confidence) | $($b.cost_est) | $($[Math]::Round($b.Score, 2)) |"
+    $roundScore = [Math]::Round($b.Score, 2)
+    $resultsTable += "`n| $($b.bidder) | $($b.confidence) | $($b.cost_est) | $roundScore |"
 }
 
+$finalScore = [Math]::Round($winner.Score, 2)
 $commentBody = @"
 ### Guild Auction Results (#$IssueNumber)
 $resultsTable
 
 **Winner:** $($winner.bidder)
-**Final Score:** $([Math]::Round($winner.Score, 2))
+**Final Score:** $finalScore
 **Bidder Strategy:** $($winner.approach)
 **Registry:** Auction logged to memory/guild-ledger.json.
 "@
