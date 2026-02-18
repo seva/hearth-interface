@@ -9,7 +9,6 @@
 npm-debug.log*
 
 # Memory (Root)
-/MEMORY.md
 /memory/
 /AGENTS.md
 /SOUL.md
