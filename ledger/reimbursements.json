@@ -1,0 +1,29 @@
+[
+  {
+    "id": "init-001",
+    "date": "2026-02-10",
+    "description": "LLC Filing Fee",
+    "amount_cad": 140.00,
+    "original_amount": "102 USD",
+    "category": "legal",
+    "source": "manual"
+  },
+  {
+    "id": "init-002",
+    "date": "2026-02-18",
+    "description": "ETH Funding",
+    "amount_cad": 53.30,
+    "original_amount": "0.01965 ETH",
+    "category": "funding",
+    "source": "manual"
+  },
+  {
+    "id": "init-003",
+    "date": "2026-02-18",
+    "description": "Base Mainnet Deployment (Governance)",
+    "amount_cad": 3.80,
+    "original_amount": "0.0014 ETH",
+    "category": "gas",
+    "source": "manual"
+  }
+]
