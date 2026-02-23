@@ -19,9 +19,9 @@
 
 ## 💡 Governance
 - **Mode:** Member-Managed (DAO)
-- **Token:** HRTH (`0x27cfe8EdF0B8D2Af78F9668fD35aA96b612FEEDe` on Base Sepolia)
-- **Governor:** `0x70C5A7d5FBc03DeCBB15332BE384791645041387` (Base Sepolia)
-- **Treasury:** Timelock (`0xc13E5FFaE89324fA5bb2eb7cB2a021aB15d71d6F` on Base Sepolia)
+- **Token:** `0xE03351070DF51Faf3eddAeb975fce169749C7007` (Base Mainnet)
+- **Governor:** `0x69B56F01098e800b836E6E8EbC1538C8E7808B47` (Base Mainnet)
+- **Treasury:** `0x171E4E986ADDD4C81Ac0f10f96EAcb2688E8958a` (Base Mainnet)
 - **Operations:** Delegated Smart Contract (Code-as-Manager)
 
 ## Key Dates

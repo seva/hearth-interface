@@ -26,23 +26,23 @@
 ### Mainnet Critical Path
 ```
 #46 Tests ────────┐
-                   ├──> #49 Audit (Slither+Manual) ──> #50 Mainnet Deploy ──> #51 File Amendment
-#3  Gov Verify ────┘                                  (Pending Funding)      (Hard Deadline: Mar 14)
+                   ├──> #49 Audit (Slither+Manual) ──> #50 Mainnet Deploy ──> #51 NW Amendment
+#3  Gov Verify ────┘                                  (COMPLETED)           (In Progress - NW)
 ```
 
 **Week 1-2 (Feb 14-23):**
-- [x] #46 — Unit tests for Token, Governor, Timelock — DONE
+- [x] #46 — Tests (Token, Gov, Timelock) — DONE
 - [x] #3 — Governor verification with real tests — DONE
-- [x] #49 — Security Audit (Slither + Manual Review) — DONE
+- [x] #49 — Security Audit (Slither + Manual) — DONE
+- [x] #50 — Deploy governance contracts to Base Mainnet — DONE
 - [x] #71 — Guild Auction Reconsideration (Deprecated) — DONE
 
 **Week 2-3 (Feb 23-Mar 7):**
-- [ ] Fund deployer on Base Mainnet (~0.01 ETH) (Seva)
-- [ ] #50 — Deploy governance contracts to mainnet (Token, Gov, Timelock)
+- [ ] #51 — Monitor Northwest Registered Agent for Amendment Filing
 - [ ] #52 — Deploy Gnosis Safe multisig, transfer ownership
 
 **Week 3-4 (Mar 7-14):**
-- [ ] #51 — File Wyoming amendment with Governor address (Seva, blocked:human)
+- [ ] #51 — Final confirmation of Wyoming SOS identifier update (Hard Deadline: Mar 14)
 
 ## Phase 4: Capital Raise (GATED on Phase 3 + Republic Approval)
 1.  **Platform application:** Apply to Republic (Responses staged in `docs/REPUBLIC_APPLICATION_RESPONSES.md`).
