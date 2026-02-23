@@ -175,3 +175,7 @@ Please use `gh issue list` to view active tasks. In-memory task tracking is depr
 - **2026-02-20:** Durable fix for Thought Signature errors: `defaults.thinkingDefault` changed `"low"` → `"off"` by MetaThrone. Gateway restart was a workaround, not the fix.
 - **2026-02-22:** OpenClaw upgraded `2026.2.13` → `2026.2.21-2` by MetaThrone (`npm install -g openclaw@latest --ignore-scripts` — Discord native module requires VS Build Tools, skip with `--ignore-scripts`). gateway.cmd re-patched (gh CLI path, PID kill block). Lock file hash changed sha1 → sha256: `4dfcd7f4` → `3c74d636`. Re-verify hash after future upgrades.
 
+## SINGLE SOURCE OF TRUTH (Added 2026-02-23)
+- GitHub Issues (gh issue) are the absolute single source of truth for all task states, priorities, and historical progress.
+- Local documentation (Roadmap, Strategy) and in-context memory must be reconciled against GitHub at the start of every session.
+- Conflicting local files are subordinate to the GitHub record. NEVER trust a file over a gh issue comment/state.
