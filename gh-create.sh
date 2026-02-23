@@ -1,0 +1,1 @@
+["gh issue create --title issue-title.txt --label issue-label.txt --body issue-body.txt"]

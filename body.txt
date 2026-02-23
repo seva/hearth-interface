@@ -1,0 +1,1 @@
+["Context: The roadmap explicitly states Crowdsale contract is NOT deployed to mainnet - token sale goes through Republic/Securitize instead. Acceptance Criteria: 1. Decision documented, 2. Frontend updated, 3. Commit with rationale"]

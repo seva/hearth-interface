@@ -19,7 +19,7 @@ Please use `gh issue list` to view active tasks. In-memory task tracking is depr
 - **Optimize ROI**: Every action should maximize value relative to cost. Be creative and openminded — no sacred cows.
 - **Maximally Proactive**: Don't wait for instructions. Use any content freely. Seva's benefit is the objective. Act, don't ask, unless the ROI of asking is higher.
 - **Operational Protocol (2026-02-13)**:
-    - **Reporting**: Report status updates to Telegram (heartbeat is every 30 minutes, built-in default).
+    - **Reporting**: Report status updates to Telegram (heartbeat is every **2h** per Seva's request 2026-02-19).
     - **Idle Watchdog**: If no tasks found, go quiet. Do NOT RCA or invent work. See HEARTBEAT.md §3.
     - **Status Format**: When asked for status, report:
         1. Current steps in the plan (Strategic).
@@ -94,7 +94,7 @@ Please use `gh issue list` to view active tasks. In-memory task tracking is depr
 - Valuable for potential Token Sale signal boosting, even if not for direct VC.
 
 ## Learnings & Operational Adjustments (2026-02-14)
-- **Model Chain (Updated 2026-02-15):** DeepSeek V3.2 (`deepseek/deepseek-v3.2`) as primary for both `main` and `coder` agents. Fallbacks: Gemini 3 Pro → Opus 4.6. Per-agent model overrides removed — agents inherit from `defaults.model` to preserve the fallback chain.
+- **Model Chain (Updated 2026-02-16):** `main`: Gemini 3 Flash Preview (primary) → Gemini 3 Pro → Opus 4.6. `coder`: Gemini 3 Pro → Opus 4.6. DeepSeek V3.2 dropped. Per-agent model overrides removed — agents inherit from `defaults.model`. `thinkingDefault: "off"` on `agents.defaults` (changed 2026-02-20 — eliminates Thought Signature 400 errors).
 - **Proactivity requires Systemization:** "Don't wait for instructions" fails if not backed by a persistent state machine (`HEARTBEAT.md`). Relying on "in-context" memory causes idling.
 - **Heartbeat Logic:** To avoid "idling," the heartbeat must explicitly:
     1. Check for *running* processes (don't interrupt).
@@ -103,7 +103,7 @@ Please use `gh issue list` to view active tasks. In-memory task tracking is depr
 - **Status Reporting:** Users perceive silence as failure.
     - **Rule:** Report *Completion %* for all active tasks.
     - **Rule:** Report *Surprises/Risks* immediately.
-- **Execution Engine:** Built-in heartbeat (30 min default) drives the task loop. Custom cron removed 2026-02-16.
+- **Execution Engine:** Heartbeat (2h, cron ID: `f32ebc7a-2247-46b9-801a-e7a87c7e610c`) drives the task loop. Custom cron removed 2026-02-16.
 - **Git Hygiene:** Always `pull --rebase` before pushing to handle concurrent edits (Shadow Buddy). Use `stash` if the tree is dirty.
 - **Toolchain Stability:** User-Mode Node 20 (via `fnm`) + Hardhat 2 is the stable path. Avoid System Node 24 + Hardhat 3.
 - **Dependency Management:** Hardhat plugins often conflict with modern Node strictness (ESM). Prefer downgrading tools (Hardhat 2.22.x) over fighting the environment.
@@ -156,5 +156,22 @@ Please use `gh issue list` to view active tasks. In-memory task tracking is depr
 ### Project Management
 - **ROI of Decoupling:** Technical blockers (like wallet seeding) should be decoupled from human verification whenever possible to restore autonomous execution speed.
 - **Founder's Debt:** All bootstrap expenses (LLC fees, gas seeder) should be ledgered immediately for future DAO reimbursement to maintain financial transparency.
+- **UI Constraints in Legal Ops (2026-02-17):** DASHBOARD UI limits (single-line inputs) can truncate critical legal disclosures. Always have a "Guru-optimized" condensed version of legal strings (statute + identifier) ready for third-party filing portals.
+- **Third-Party Filing Latency:** Registered agents (e.g., Northwest) may provide "conservative" estimates (e.g., 40 days) that exceed legal deadlines (30 days). Always maintain a "wet-signature" physical backup for manual mail-in if the digital status doesn't advance within 7 days.
+- **Character-Level Audits:** When transposing smart contract addresses from terminal to PDF/Dashboard, perform a character-by-character check against mainnet explorer data. One hallucinated character breaks physical-legal linkage.
 
-_Last updated: 2026-02-17_
+## Execution Discipline (added 2026-02-20 by MetaThrone)
+
+- **Read the actual error before diagnosing.** Pattern-matching to a familiar failure mode without reading the evidence produces wrong RCAs. The error text is the primary evidence. Use it.
+- **"Done" means verified, not applied.** Every config change, every update — verify it worked before declaring complete. If you can't test it, say so explicitly.
+- **Read your own output before submitting.** Contradictions are caught by a single readback. If you wouldn't accept it from Seva, don't submit it.
+- **Context pollution is an operational cost.** Dead files in the workspace burn tokens on every boot. Delete deprecated artifacts — don't leave them "for reference."
+- **Hypothesize, don't conclude.** When something unexpected happens: (1) state what was observed, (2) pose hypotheses explicitly as hypotheses, (3) test before concluding. "I don't know" is better than a confident fabrication. Overconfident explanations create churn and destroy trust.
+
+## Operational Log
+- **2026-02-19:** Reduced heartbeat frequency from 1h to **2h** per Seva's request to reduce noise/cost.
+- **2026-02-19:** Confirmed **Republic** as the lead platform for the $500k Reg D raise (ROI-positive compared to Securitize).
+- **2026-02-19:** Reduced heartbeat to 2h per Seva's request. Confirmed Republic as lead platform for $500k Reg D raise. Gateway restart temporarily resolved Vertex AI 400 "Thought Signature" errors.
+- **2026-02-20:** Durable fix for Thought Signature errors: `defaults.thinkingDefault` changed `"low"` → `"off"` by MetaThrone. Gateway restart was a workaround, not the fix.
+- **2026-02-22:** OpenClaw upgraded `2026.2.13` → `2026.2.21-2` by MetaThrone (`npm install -g openclaw@latest --ignore-scripts` — Discord native module requires VS Build Tools, skip with `--ignore-scripts`). gateway.cmd re-patched (gh CLI path, PID kill block). Lock file hash changed sha1 → sha256: `4dfcd7f4` → `3c74d636`. Re-verify hash after future upgrades.
+

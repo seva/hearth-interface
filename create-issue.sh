@@ -1,0 +1,1 @@
+["gh issue create --title \"Meta] Frontend priority review - crowdsale deprecation decision\" --label meta,P2"]
