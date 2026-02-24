@@ -7,6 +7,7 @@
   },
   "dependencies": {
     "@openzeppelin/contracts": "^5.0.0",
+    "@safe-global/api-kit": "^4.0.1",
     "@safe-global/protocol-kit": "^6.1.2",
     "hardhat": "^2.19.0"
   },
