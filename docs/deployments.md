@@ -10,6 +10,8 @@ Deployed 2026-02-18. Source of truth: issue #50.
 | HearthTimelock | `0x171E4E986ADDD4C81Ac0f10f96EAcb2688E8958a` |
 | HearthGovernor | `0x69B56F01098e800b836E6E8EbC1538C8E7808B47` |
 
+Deployer wallet: `0xADb4323833638DC6Db7294E50AfccD9f8A61C087` (generated with crypto.randomBytes)
+
 Crowdsale: not deployed — gated on securities counsel clearance (issue #48).
 
 ## Base Sepolia (Testnet — v2)
