@@ -16,11 +16,12 @@
 | 5 | Idle watchdog when blocked | operations.policy.md | AUDITED | ✅ Active |
 | 6 | Task dispatch tiers | operations.policy.md | AUDITED | ⚠️ Uncalibrated |
 | 7-15 | (Various) | knowledge/safety/hearth.policy.md | CONSTITUTIONAL | 📝 Text-only |
-| 16 | **Version agent outputs** | 05-agent-workflow.policy.md | **ENFORCED** | 🆕 **New** |
-| 17 | **Reference issues in commits** | 05-agent-workflow.policy.md | **ENFORCED** | 🆕 **New** |
-| 18 | **Specify output location in spawn** | 05-agent-workflow.policy.md | **ENFORCED** | 🆕 **New** |
-| 19 | **Mirror critical infrastructure** | 05-agent-workflow.policy.md | **AUDITED** | 🆕 **New** |
-| 20 | **Close loop on spawned tasks** | 05-agent-workflow.policy.md | **AUDITED** | 🆕 **New** |
+| 16 | **Version agent outputs** | 05-agent-workflow.policy.md | **ENFORCED** | ✅ Active |
+| 17 | **Reference issues in commits** | 05-agent-workflow.policy.md | **ENFORCED** | ✅ Active |
+| 18 | **Specify output location in spawn** | 05-agent-workflow.policy.md | **ENFORCED** | ✅ Active |
+| 19 | **Mirror critical infrastructure** | 05-agent-workflow.policy.md | **AUDITED** | ✅ Active |
+| 20 | **Close loop on spawned tasks** | 05-agent-workflow.policy.md | **AUDITED** | ✅ Active |
+| 21 | **"Complete" = success criteria met** | 05-agent-workflow.policy.md | **ENFORCED** | 🆕 **New** |
 
 ---
 

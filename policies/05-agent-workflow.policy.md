@@ -91,6 +91,30 @@ When a spawned agent completes:
 
 ---
 
+### DO: Define "Complete" as Success Criteria Met [ENFORCED]
+
+**"Complete" means ALL definition of done (success criteria) are met. By default:**
+
+1. ✅ **GitHub committed** — Code is in the repo, not just local
+2. ✅ **Tests passing** — Relevant tests executed and green
+3. ✅ **Issue updated** — Parent issue has completion comment with SHA
+4. ✅ **Mirrored if external** — Runtime files in `~/.openclaw/` have tracked mirrors
+
+**Task authors MAY extend this default:**
+```
+Success criteria for #108:
+- [ ] Governance directory created (~/.openclaw/governance/)
+- [ ] Analyzer script functional (tested with sample data)
+- [ ] Proposal engine respects 3/week cap (verified)
+- [ ] Policy committed to GitHub (SHA in issue comment)
+```
+
+**Enforcement:** Protocol Enforcer blocks `sessions_spawn` completion announcement until success criteria are verified. Issue cannot be closed without all checkboxes marked.
+
+**Rationale:** "Complete" is not a feeling. It's a checklist. "Push pending" is an oxymoron — either it's pushed (done) or it's not (incomplete).
+
+---
+
 ## Enforcement Matrix
 
 | Rule | Enforcement Level | Plugin Hook | Recovery |
