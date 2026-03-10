@@ -76,11 +76,44 @@ The following do NOT require per-instance approval:
 
 ---
 
+## Verbatim Archive Policy (Soft Policy)
+
+**Principle:** Whenever viable, store verbatim copies of ALL external communications.
+
+**What to Archive:**
+| Type | Storage Location | Format |
+|------|-----------------|--------|
+| **Emails sent** | GitHub issue comment + daily memory log | Full text, recipients, attachments list |
+| **Emails received** | GitHub issue comment + daily memory log | Full text, forward or copy |
+| **IM message threads** | Daily memory log | Screenshot or copy-paste |
+| **Call transcripts** | Daily memory log | Notes or recording summary |
+| **Public posts** | Daily memory log | URL + full text |
+| **Bug reports** | GitHub issue comment | Link to external issue + full text |
+
+**Why:**
+1. **Audit trail** — Exact wording preserved for future reference
+2. **Response matching** — Replies can be compared to original questions
+3. **Timeline evidence** — Shows when we acted
+4. **Accountability** — Clear record of what was committed/asked/promised
+
+**Exceptions (when verbatim is NOT viable):**
+- Length constraints (e.g., very long threads — summarize with key excerpts)
+- Platform restrictions (e.g., can't copy from certain apps — screenshot instead)
+- Sensitivity (e.g., contains third-party PII — redact before archiving)
+
+**Implementation:**
+- GitHub: Comment on relevant issue with full text
+- Memory: Add to daily log (`memory/YYYY-MM-DD.md`)
+- Governance: Log to `governance/violations.jsonl` only if policy violated
+
+---
+
 ## Revision History
 
 | Version | Date | Change |
 |---------|------|--------|
 | 1.0 | 2026-03-10 | Initial policy after privacy breach incident |
+| 1.1 | 2026-03-10 | Added verbatim archive policy (soft policy) |
 
 ---
 
