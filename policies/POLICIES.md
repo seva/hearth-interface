@@ -1,6 +1,6 @@
 # Policy Enforcement Status
 
-**Last updated:** 2026-03-08  
+**Last updated:** 2026-03-10  
 **Source:** `policies/*.policy.md`
 
 ---
@@ -21,7 +21,14 @@
 | 18 | **Specify output location in spawn** | 05-agent-workflow.policy.md | **ENFORCED** | ✅ Active |
 | 19 | **Mirror critical infrastructure** | 05-agent-workflow.policy.md | **AUDITED** | ✅ Active |
 | 20 | **Close loop on spawned tasks** | 05-agent-workflow.policy.md | **AUDITED** | ✅ Active |
-| 21 | **"Complete" = success criteria met** | 05-agent-workflow.policy.md | **ENFORCED** | 🆕 **New** |
+| 21 | **"Complete" = success criteria met** | 05-agent-workflow.policy.md | **ENFORCED** | ✅ Active |
+| 22 | **Obtain approval before external communication** | 07-external-communication.policy.md | **ENFORCED** | 🆕 **New** |
+| 23 | **Sanitize content before external posting** | 07-external-communication.policy.md | **ENFORCED** | 🆕 **New** |
+| 24 | **Archive verbatim copies of external communications** | 07-external-communication.policy.md | **ENFORCED** | 🆕 **New** |
+| 25 | **Use minimal reproduction for bug reports** | 07-external-communication.policy.md | **AUDITED** | 🆕 **New** |
+| 26 | **Don't file external issues without approval** | 07-external-communication.policy.md | **ENFORCED** | 🆕 **New** |
+| 27 | **Don't include sensitive data in external communications** | 07-external-communication.policy.md | **ENFORCED** | 🆕 **New** |
+| 28 | **Incident response procedure** | 07-external-communication.policy.md | **AUDITED** | 🆕 **New** |
 
 ---
 
@@ -45,6 +52,7 @@
 | `04-safety.policy.md` | DONT: security, keys, external actions, data |
 | `05-agent-workflow.policy.md` | WORKFLOW: versioning, commits, spawn discipline |
 | `06-hearth.policy.md` | PROJECT: legal gates, deploy checklist |
+| `07-external-communication.policy.md` | EXTERNAL: approval, sanitization, verbatim archive |
 
 ---
 
