@@ -1,0 +1,23 @@
+{
+  "version": "1.0.0",
+  "enabled": true,
+  "violationsPath": "~/.openclaw/governance/violations.jsonl",
+  "compliancePath": "~/.openclaw/governance/compliance.json",
+  "proposalsPath": "~/.openclaw/governance/proposals.jsonl",
+  "analysisWindow": {
+    "days": 7,
+    "driftThreshold": 0.10,
+    "patternMinOccurrences": 3
+  },
+  "autoApply": {
+    "enabled": true,
+    "maxPerWeek": 3,
+    "allowedRiskTiers": ["low"],
+    "requireRollbackInstructions": true
+  },
+  "riskTiers": {
+    "low": "Additive changes only, no enforcement relaxation",
+    "medium": "Requires human approval",
+    "high": "Requires human approval + audit review"
+  }
+}
