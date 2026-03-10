@@ -115,6 +115,31 @@ Success criteria for #108:
 
 ---
 
+### DONT: Modify HEARTBEAT.md Without Approval [ENFORCED]
+
+**NEVER modify, truncate, or delete `HEARTBEAT.md` without explicit user approval.**
+
+**What HEARTBEAT.md is:**
+- Persistent protocol definition (read-only by default)
+- Survives session restarts
+- Contains §0-§5 execution steps
+
+**What HEARTBEAT.md is NOT:**
+- Consumable instructions (not a message queue)
+- One-time checklist (not "read and discard")
+- Editable configuration (not a settings file)
+
+**Standing Rule:**
+- ✅ READ `HEARTBEAT.md` and execute §0-§5
+- ✅ Leave file unchanged after execution
+- ❌ NEVER modify, truncate, or delete **unless Seva explicitly approves**
+
+**Enforcement:** Weekly audit checks `HEARTBEAT.md` for modifications. Any unapproved change triggers violation report.
+
+**Rationale:** Wiping `HEARTBEAT.md` silently disables heartbeat for all future sessions. This is infrastructure, not scratch paper. Legitimate updates require human oversight.
+
+---
+
 ## Enforcement Matrix
 
 | Rule | Enforcement Level | Plugin Hook | Recovery |
@@ -124,6 +149,7 @@ Success criteria for #108:
 | Specify output location | ENFORCED | `before_tool_call` (sessions_spawn) | Block spawn, require output dir |
 | Mirror critical infra | AUDITED | Weekly cron | Create issue, list unmirrored files |
 | Close loop on spawns | AUDITED | Weekly cron | Create issue, list orphaned spawns |
+| Don't modify HEARTBEAT.md without approval | ENFORCED | Weekly audit | Create issue, restore from backup |
 
 ---
 
