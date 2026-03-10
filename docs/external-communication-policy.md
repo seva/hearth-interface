@@ -80,31 +80,40 @@ The following do NOT require per-instance approval:
 
 **Principle:** Whenever viable, store verbatim copies of ALL external communications.
 
+**Storage Location:**
+| Location | Priority | When |
+|----------|----------|------|
+| **GitHub** | ALWAYS (primary) | All external communications |
+| **Public link** | Secondary (if public) | When communication is publicly accessible |
+| **Memory log** | Tertiary (backup) | Daily log copy for local reference |
+
 **What to Archive:**
-| Type | Storage Location | Format |
-|------|-----------------|--------|
-| **Emails sent** | GitHub issue comment + daily memory log | Full text, recipients, attachments list |
-| **Emails received** | GitHub issue comment + daily memory log | Full text, forward or copy |
-| **IM message threads** | Daily memory log | Screenshot or copy-paste |
-| **Call transcripts** | Daily memory log | Notes or recording summary |
-| **Public posts** | Daily memory log | URL + full text |
-| **Bug reports** | GitHub issue comment | Link to external issue + full text |
+| Type | GitHub Location | Public Link | Memory Log |
+|------|-----------------|-------------|------------|
+| **Emails sent** | Relevant issue comment | N/A (private) | Copy |
+| **Emails received** | Relevant issue comment | N/A (private) | Copy |
+| **IM message threads** | Relevant issue comment | N/A (private) | Copy |
+| **Call transcripts** | Relevant issue comment | N/A (private) | Summary |
+| **Public posts** | Relevant issue comment | URL to public post | Copy |
+| **Bug reports (external)** | Relevant issue comment | URL to external issue | Copy |
 
 **Why:**
 1. **Audit trail** — Exact wording preserved for future reference
 2. **Response matching** — Replies can be compared to original questions
 3. **Timeline evidence** — Shows when we acted
 4. **Accountability** — Clear record of what was committed/asked/promised
+5. **GitHub = single source of truth** — Public, searchable, linked to issues
 
 **Exceptions (when verbatim is NOT viable):**
-- Length constraints (e.g., very long threads — summarize with key excerpts)
-- Platform restrictions (e.g., can't copy from certain apps — screenshot instead)
-- Sensitivity (e.g., contains third-party PII — redact before archiving)
+- Length constraints (very long threads — summarize with key excerpts)
+- Platform restrictions (can't copy from certain apps — screenshot instead)
+- Sensitivity (contains third-party PII — redact before archiving)
 
 **Implementation:**
-- GitHub: Comment on relevant issue with full text
-- Memory: Add to daily log (`memory/YYYY-MM-DD.md`)
-- Governance: Log to `governance/violations.jsonl` only if policy violated
+1. **ALWAYS:** GitHub comment on relevant issue (primary archive)
+2. **IF PUBLIC:** Also store public URL (secondary reference)
+3. **ALSO:** Daily memory log copy (tertiary backup)
+4. **Governance:** Log to `governance/violations.jsonl` only if policy violated
 
 ---
 
