@@ -1,0 +1,33 @@
+[
+  {
+    "id": "07ada035-38d9-4aec-bab0-4aab0b030872",
+    "name": "Unified Daily Cost Tracker",
+    "schedule": {
+      "kind": "cron",
+      "expr": "0 0 * * *",
+      "tz": "America/Toronto"
+    },
+    "payload": {
+      "kind": "agentTurn",
+      "message": "C:\\Users\\seval\\.openclaw\\workspace\\scripts\\unified-cost-poll.ps1",
+      "model": "fast"
+    },
+    "sessionTarget": "isolated",
+    "enabled": true
+  },
+  {
+    "id": "5765bbbf-6034-4732-ac23-1d8cc25f01b2",
+    "name": "Daily ROI Rebalance",
+    "schedule": {
+      "kind": "cron",
+      "expr": "0 9 * * *",
+      "tz": "America/Toronto"
+    },
+    "payload": {
+      "kind": "systemEvent",
+      "text": "💰 **Weekly ROI Rebalance**\nTime to audit our model spend. Check `session_status` for cost outliers. Review available local models for cheaper alternatives. Run `openclaw status` to verify configuration efficiency."
+    },
+    "sessionTarget": "main",
+    "enabled": true
+  }
+]
