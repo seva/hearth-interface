@@ -2,6 +2,10 @@ const { ethers } = require('hardhat');
 const fs = require('fs');
 require('dotenv').config();
 
+const ProposalState = [
+    "Pending", "Active", "Canceled", "Defeated", "Succeeded", "Queued", "Expired", "Executed"
+];
+
 async function main() {
     console.log('--- Verifying Sepolia Deployment ---');
     
@@ -21,6 +25,7 @@ async function main() {
     const token = await ethers.getContractAt("HearthToken", tokenAddress);
     const crowdsale = await ethers.getContractAt("HearthCrowdsale", crowdsaleAddress);
     const governor = await ethers.getContractAt("HearthGovernor", governorAddress);
+    const timelock = await ethers.getContractAt("HearthTimelock", timelockAddress);
     
     console.log("1. Safe Address:", safeAddress);
     
@@ -40,11 +45,59 @@ async function main() {
         console.log("   ❌ ERROR: Crowdsale owner mismatch.");
     }
     
-    // Check pending proposals
-    // Since we created a proposal, let's just log it. Getting the exact proposal ID requires listening to events.
-    console.log("4. Timelock Roles: Governance Proposal Created.");
-    console.log("   ✅ Proposal to grant PROPOSER, EXECUTOR, and CANCELLER roles is in the Governor's queue.");
-    console.log("   (Note: Must wait for Voting Delay, Voting Period, and Timelock Delay to execute).");
+    // Proposal Parameters
+    const PROPOSER_ROLE = await timelock.PROPOSER_ROLE();
+    const EXECUTOR_ROLE = await timelock.EXECUTOR_ROLE();
+    const CANCELLER_ROLE = await timelock.CANCELLER_ROLE();
+    
+    const targets = [timelockAddress, timelockAddress, timelockAddress];
+    const values = [0, 0, 0];
+    const calldatas = [
+        timelock.interface.encodeFunctionData("grantRole", [PROPOSER_ROLE, safeAddress]),
+        timelock.interface.encodeFunctionData("grantRole", [EXECUTOR_ROLE, safeAddress]),
+        timelock.interface.encodeFunctionData("grantRole", [CANCELLER_ROLE, safeAddress])
+    ];
+    const description = "Configure Timelock Roles for New Safe";
+    const descriptionHash = ethers.id(description);
+    const proposalId = await governor.hashProposal(targets, values, calldatas, descriptionHash);
+    
+    console.log("4. Governance Proposal State:");
+    try {
+        const state = await governor.state(proposalId);
+        const stateName = ProposalState[Number(state)];
+        
+        const votes = await governor.proposalVotes(proposalId);
+        const againstVotes = ethers.formatUnits(votes[0], 18);
+        const forVotes = ethers.formatUnits(votes[1], 18);
+        const abstainVotes = ethers.formatUnits(votes[2], 18);
+        
+        console.log(`   Proposal ID: ${proposalId}`);
+        console.log(`   State: ${stateName} (${state})`);
+        console.log(`   Votes: For=${forVotes}, Against=${againstVotes}, Abstain=${abstainVotes}`);
+        
+        if (stateName === "Pending" || stateName === "Active" || stateName === "Succeeded" || stateName === "Queued") {
+            console.log("   ✅ Governance Proposal is valid and progressing.");
+        } else {
+            console.log("   ❌ Governance Proposal is in an invalid or failed state.");
+        }
+    } catch(e) {
+        console.log("   ❌ Error querying proposal state:", e.message);
+    }
+    
+    console.log("5. Timelock Roles:");
+    const hasProposer = await timelock.hasRole(PROPOSER_ROLE, safeAddress);
+    const hasExecutor = await timelock.hasRole(EXECUTOR_ROLE, safeAddress);
+    const hasCanceller = await timelock.hasRole(CANCELLER_ROLE, safeAddress);
+    
+    console.log(`   PROPOSER_ROLE: ${hasProposer ? "✅ Granted" : "❌ Not Granted"}`);
+    console.log(`   EXECUTOR_ROLE: ${hasExecutor ? "✅ Granted" : "❌ Not Granted"}`);
+    console.log(`   CANCELLER_ROLE: ${hasCanceller ? "✅ Granted" : "❌ Not Granted"}`);
+    
+    if (hasProposer && hasExecutor && hasCanceller) {
+        console.log("   ✅ All Timelock roles successfully granted to Safe.");
+    } else {
+        console.log("   ⏳ Waiting for Governance Proposal to execute to grant Timelock roles.");
+    }
 }
 
 main().catch(console.error);
