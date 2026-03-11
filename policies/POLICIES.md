@@ -32,6 +32,7 @@
 | 29 | **Verify command syntax before execution** | 05-agent-workflow.policy.md | **ENFORCED** | 🆕 **New** |
 | 30 | **Don't present unverified knowledge as authoritative** | 05-agent-workflow.policy.md | **ENFORCED** | 🆕 **New** |
 | 31 | **Frame exception proposals as criterion amendments** | 05-agent-workflow.policy.md | **AUDITED** | 🆕 **New** |
+| 32 | **Put task instructions in GitHub issue body** | 05-agent-workflow.policy.md | **ENFORCED** | 🆕 **New** |
 
 ---
 

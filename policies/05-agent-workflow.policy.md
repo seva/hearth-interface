@@ -214,6 +214,48 @@ Success criteria for #108:
 
 ---
 
+### DO: Put Task Instructions in GitHub Issue Body [ENFORCED]
+
+**When spawning an agent, ALL critical instructions MUST be in the GitHub issue body:**
+
+1. **Issue body = single source of truth** — Spawn messages are ephemeral, issues persist
+2. **Include in issue:**
+   - DOs and DONTs (e.g., "DO create new scripts, DONT modify existing")
+   - Contract addresses / configuration values
+   - Success criteria (checklist format)
+   - Definition of Done
+   - Related issues / dependencies
+3. **Spawn message = pointer to issue** — Brief summary + issue URL, not full instructions
+
+**Enforcement:** Protocol Enforcer checks `sessions_spawn` task includes issue URL. Weekly audit verifies issue body contains task instructions.
+
+**Recovery:** Edit issue to add missing instructions before re-spawning.
+
+**Rationale:** Spawn messages disappear after agent completes. GitHub issues are permanent record. Agents that fail mid-task can re-read issue to recover context. "If it's not in the issue, it doesn't exist."
+
+**Example (from #125):**
+```markdown
+## ⚠️ CRITICAL: Script Policy
+
+**EXISTING SCRIPTS — DO NOT MODIFY:**
+- protocol/scripts/deploy-safe.js
+- protocol/scripts/deploy_crowdsale.ts
+
+**CREATE NEW SCRIPTS:**
+- protocol/scripts/deploy-safe-sepolia.js
+- protocol/scripts/transfer-token-ownership-sepolia.js
+- ...
+```
+
+**Spawn message (brief):**
+```
+Execute Issue #125
+Read the full issue: https://github.com/seva/hearth-interface/issues/125
+All details are in the issue body.
+```
+
+---
+
 ## Enforcement Matrix
 
 | Rule | Enforcement Level | Plugin Hook | Recovery |
@@ -225,7 +267,8 @@ Success criteria for #108:
 | Close loop on spawns | AUDITED | Weekly cron | Create issue, list orphaned spawns |
 | Don't modify HEARTBEAT.md without approval | ENFORCED | Weekly audit | Create issue, restore from backup |
 | Verify command syntax before execution | ENFORCED | `before_tool_call` (exec) | Block, require --help first |
-| **Frame exceptions as criterion amendments** | **AUDITED** | **Weekly audit** | **Reopen issue, amend criterion properly** |
+| Frame exceptions as criterion amendments | AUDITED | Weekly audit | Reopen issue, amend criterion properly |
+| **Put task instructions in issue body** | **ENFORCED** | **`before_tool_call` (sessions_spawn)** | **Edit issue, re-spawn** |
 
 ---
 
@@ -277,7 +320,7 @@ api.on("before_tool_call", (event, ctx) => {
 
 | Version | Date | Change |
 |---------|------|--------|
-| 2.0 | 2026-03-11 | Added Rule #31: Frame exception proposals as criterion amendments (from #114 success criteria gap incident) |
+| 3.0 | 2026-03-11 | Added Rule #32: Put task instructions in GitHub issue body (from #125 coder failures)`n| 2.0 | 2026-03-11 | Added Rule #31: Frame exception proposals as criterion amendments (from #114 success criteria gap incident) |
 | 1.0 | 2026-03-08 | Initial policy created after #108 work was orphaned in gitignored directories |
 
 ---
