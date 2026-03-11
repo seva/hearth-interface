@@ -1,0 +1,59 @@
+﻿<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<test-results xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="nunit_schema_2.5.xsd" name="Pester" total="1" errors="0" failures="1" not-run="0" inconclusive="0" ignored="0" skipped="0" invalid="0" date="2026-03-11" time="11:45:41">
+  <environment user="seval" machine-name="LAPTOP-1S7MKKK6" cwd="C:\Users\seval\.openclaw\workspace\protocol\scripts\tests" user-domain="LAPTOP-1S7MKKK6" platform="Microsoft Windows 11 Home Insider Preview|C:\WINDOWS|\Device\Harddisk0\Partition3" nunit-version="2.5.8.0" os-version="10.0.26300" clr-version="4.0.30319.42000" />
+  <culture-info current-culture="en-CA" current-uiculture="en-GB" />
+  <test-suite type="Powershell" name="Pester" executed="True" result="Failure" success="False" time="0.43" asserts="0">
+    <results>
+      <test-suite type="TestFixture" name="Error in .\auto-fix.tests.ps1" executed="True" result="Failure" success="False" time="0.43" asserts="0" description="Error in .\auto-fix.tests.ps1">
+        <results>
+          <test-case description="Error occurred in test script '.\auto-fix.tests.ps1'" name="Error in .\auto-fix.tests.ps1.Error occurred in test script '.\auto-fix.tests.ps1'" time="0.43" asserts="0" success="False" result="Failure" executed="True">
+            <failure>
+              <message>At C:\Users\seval\.openclaw\workspace\protocol\scripts\tests\auto-fix.tests.ps1:44 char:162
++ ... = "Servant-mode phrase detected: 'Would you like'; agentId = "main"},
++                                                                   ~~~~~~~
+Unexpected token 'main"},
+                @{timestamp = (Get-Date).AddDays(-5).ToString("o"); type = "SERVANT_MODE"; details = "Servant-mode' in expression or statement.
+
+At C:\Users\seval\.openclaw\workspace\protocol\scripts\tests\auto-fix.tests.ps1:44 char:162
++ ... = "Servant-mode phrase detected: 'Would you like'; agentId = "main"},
++                                                                   ~
+The hash literal was incomplete.
+
+At C:\Users\seval\.openclaw\workspace\protocol\scripts\tests\auto-fix.tests.ps1:45 char:167
++ ... = "Servant-mode phrase detected: 'Would you like'; agentId = "main"},
++                                                                        ~
+Missing closing ')' in subexpression.
+
+At C:\Users\seval\.openclaw\workspace\protocol\scripts\tests\auto-fix.tests.ps1:46 char:162
++ ... = "Servant-mode phrase detected: 'Would you like'; agentId = "main"},
++                                                                   ~~~~~~~
+Unexpected token 'main"},
+                @{timestamp = (Get-Date).AddDays(-1).ToString("o"); type = "MEMORY_RETRIEVAL_VIOLATION"; details = "Memory' in expression or statement.
+
+At C:\Users\seval\.openclaw\workspace\protocol\scripts\tests\auto-fix.tests.ps1:46 char:162
++ ... = "Servant-mode phrase detected: 'Would you like'; agentId = "main"},
++                                                                   ~
+The hash literal was incomplete.
+
+At C:\Users\seval\.openclaw\workspace\protocol\scripts\tests\auto-fix.tests.ps1:352 char:145
++ ... ls = "Servant-mode phrase detected: 'test phrase'"; agentId = "main"}
++                                                     ~~~~~~~~~~~~~~~~~~~~~
+The string is missing the terminator: '.
+
+At C:\Users\seval\.openclaw\workspace\protocol\scripts\tests\auto-fix.tests.ps1:37 char:41
++     Context "auto-fix-servant-mode.ps1" {
++                                         ~
+Missing closing '}' in statement block or type definition.
+
+At C:\Users\seval\.openclaw\workspace\protocol\scripts\tests\auto-fix.tests.ps1:35 char:42
++ Describe "Auto-Fix Scripts - Unit Tests" {
++                                          ~
+Missing closing '}' in statement block or type definition.</message>
+              <stack-trace>at &lt;ScriptBlock&gt;, C:\Program Files\WindowsPowerShell\Modules\Pester\3.4.0\Pester.psm1: line 297</stack-trace>
+            </failure>
+          </test-case>
+        </results>
+      </test-suite>
+    </results>
+  </test-suite>
+</test-results>
