@@ -1,1 +1,23 @@
-[]
+[
+  {
+    "id": "8ef3c5a6-faa9-4029-b061-97f33e78ec93",
+    "agentId": "guru",
+    "name": "Roadmap Grooming",
+    "schedule": {
+      "kind": "cron",
+      "expr": "0 10 * * 1",
+      "tz": "America/Toronto"
+    },
+    "payload": {
+      "kind": "agentTurn",
+      "message": "## Roadmap Grooming Session\n\n**Purpose:** Strategic alignment check — ensure roadmap and tasks actually serve the main goal.\n\n---\n\n## Execution Sequence\n\n### 1. Review ROADMAP\nRead HEARTH_ROADMAP.md from workspace. Summarize current strategic direction, phase gates, and stated objectives.\n\n### 2. Review Open Tasks\nRun: gh issue list --state open --json number,title,labels,assignees\nCategorize by: P0/P1/P2, blocked:human vs blocked:technical vs unblocked.\n\n### 3. Reconcile Tasks with ROADMAP\nFor each open task: Does this directly advance a roadmap objective? Flag orphans (tasks without roadmap alignment).\n\n### 4. Meditate on the Main Goal\nWhat is Hearth DAO's primary objective right now? (e.g., capital raise, compliance, product launch, community building) State it explicitly.\n\n### 5. Meditate on Alignment\nAre the current roadmap and open tasks actually leading to the main goal? Or has drift occurred? Be honest — call out misalignment.\n\n### 6. Recommend ROADMAP Changes\nIf roadmap is misaligned with goal, propose specific changes. What should be added, removed, or reprioritized?\n\n### 7. Recommend Task Changes\nIf tasks are misaligned:\n- Which should be closed (waste)?\n- Which should be created (gaps)?\n- Which should be reprioritized?\n\n### 8. Print Recommendations (DO NOT EXECUTE)\nOutput a structured report with:\n- **Current State:** Goal, Roadmap summary, Task summary\n- **Alignment Assessment:** Where we're aligned, where we've drifted\n- **Roadmap Recommendations:** Specific changes (do not apply)\n- **Task Recommendations:** Specific changes (do not apply)\n- **Next Review Date:** Suggest when to re-run this grooming\n\n---\n\n**Important:** This is a RECOMMENDATION session. Do NOT execute any changes. Do NOT create/close issues. Do NOT modify ROADMAP. Print the report and stop.\n\n**Output Format:** Markdown report, suitable for GitHub comment on #113 (Adaptive Immunity Master Tracker) or for Seva's review.",
+      "thinking": "high"
+    },
+    "sessionTarget": "isolated",
+    "delivery": {
+      "mode": "announce",
+      "channel": "last"
+    },
+    "enabled": true
+  }
+]
