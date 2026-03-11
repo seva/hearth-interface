@@ -70,6 +70,19 @@ look ahead: note upcoming deadlines or time-sensitive items
 
 ---
 
+## §4 Step 5 — Governance Check (Phase 1A)
+
+```
+// Run governance analyzer weekly (every Wednesday)
+if (Get-Date).DayOfWeek -eq "Wednesday":
+    powershell -File C:\Users\seval\.openclaw\workspace\protocol\scripts\governance-analyzer.ps1 -GenerateProposals
+    report: compliance rate, drift detected, recurring patterns
+    if complianceRate < 0.90: flag to Seva (below 90% target)
+    if driftDetected: flag to Seva (violation spike detected)
+```
+
+---
+
 ## §5 — Pre-Reply Validation
 
 ```
