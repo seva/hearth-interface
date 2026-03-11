@@ -13,21 +13,10 @@
       "model": "fast"
     },
     "sessionTarget": "isolated",
-    "enabled": true
-  },
-  {
-    "id": "5765bbbf-6034-4732-ac23-1d8cc25f01b2",
-    "name": "Daily ROI Rebalance",
-    "schedule": {
-      "kind": "cron",
-      "expr": "0 9 * * *",
-      "tz": "America/Toronto"
+    "delivery": {
+      "mode": "announce",
+      "channel": "telegram"
     },
-    "payload": {
-      "kind": "systemEvent",
-      "text": "💰 **Weekly ROI Rebalance**\nTime to audit our model spend. Check `session_status` for cost outliers. Review available local models for cheaper alternatives. Run `openclaw status` to verify configuration efficiency."
-    },
-    "sessionTarget": "main",
     "enabled": true
   }
 ]
