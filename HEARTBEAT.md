@@ -64,7 +64,12 @@ for each issue:
 // mandatory when all tasks are blocked:human
 audit blocked tasks: is anything technically unblockable?
 automation sweep: can any blocked:human task be partially progressed?
-groom roadmap: triage unblocked P2 tasks
+groom roadmap:
+  - Read HEARTH_ROADMAP.md (workspace/docs/HEARTH_ROADMAP.md or memory/topics/hearth-dao.md)
+  - Run: gh issue list --state open --json number,title,labels,priority
+  - For each P2 issue: Does this advance a roadmap phase? Flag orphans.
+  - Check deadlines: Any dates in next 7 days? Flag urgency.
+  - Output: 1-2 sentences on alignment drift (if any) + orphan issues (if any)
 look ahead: note upcoming deadlines or time-sensitive items
 ```
 
