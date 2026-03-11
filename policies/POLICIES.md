@@ -1,6 +1,6 @@
 # Policy Enforcement Status
 
-**Last updated:** 2026-03-10  
+**Last updated:** 2026-03-11  
 **Source:** `policies/*.policy.md`
 
 ---
@@ -29,6 +29,9 @@
 | 26 | **Don't file external issues without approval** | 07-external-communication.policy.md | **ENFORCED** | 🆕 **New** |
 | 27 | **Don't include sensitive data in external communications** | 07-external-communication.policy.md | **ENFORCED** | 🆕 **New** |
 | 28 | **Incident response procedure** | 07-external-communication.policy.md | **AUDITED** | 🆕 **New** |
+| 29 | **Verify command syntax before execution** | 05-agent-workflow.policy.md | **ENFORCED** | 🆕 **New** |
+| 30 | **Don't present unverified knowledge as authoritative** | 05-agent-workflow.policy.md | **ENFORCED** | 🆕 **New** |
+| 31 | **Frame exception proposals as criterion amendments** | 05-agent-workflow.policy.md | **AUDITED** | 🆕 **New** |
 
 ---
 

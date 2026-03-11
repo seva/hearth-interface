@@ -140,6 +140,80 @@ Success criteria for #108:
 
 ---
 
+### DO: Verify Command Syntax Before Execution [ENFORCED]
+
+**Before running any unfamiliar CLI command:**
+1. Run `--help` or consult documentation
+2. Verify syntax, flags, and side effects
+3. Confirm scope (what will be affected)
+
+**Enforcement:** Protocol Enforcer intercepts `exec` tool calls → checks if `--help` was run first for unfamiliar commands → blocks if not.
+
+**Recovery:** Run `--help` before retrying the command.
+
+**Rationale:** Guessing command syntax is dangerous. Could delete production configs, wipe databases, or cause irreversible damage. Tool discovery (`--help`, `which`, docs) is mandatory before execution.
+
+---
+
+### DONT: Present Unverified Knowledge as Authoritative [ENFORCED]
+
+**Never present information as fact without verification:**
+1. If unsure, say "I don't know" or "I'm not certain"
+2. If speculating, label it as speculation ("My guess is...", "This might be...")
+3. If recalling from memory, verify against source documents first
+4. Distinguish between: official docs, memory/file content, inference, speculation
+
+**Enforcement:** Protocol Enforcer flags confident assertions that contradict verified sources.
+
+**Recovery:** Acknowledge fabrication, verify against authoritative source, correct the record.
+
+**Rationale:** Confident hallucination is more dangerous than admitted ignorance. Fabricated "knowledge" leads to bad decisions, wasted time, and broken trust. "I don't know" is safer than "I'm sure" when wrong.
+
+---
+
+### DO: Frame Exception Proposals as Criterion Amendments [AUDITED]
+
+**When a success criterion seems wrong, impractical, or outdated:**
+
+1. **Scrutinize the criterion, not the closure**
+   - Wrong: "Close #114 at 92% with follow-up issue"
+   - Right: "Revisit whether S4 (14-day measurement) is the right criterion"
+
+2. **Present arguments for/against the criterion itself**
+   - Why it may be wrong (cost, value, risk tradeoffs)
+   - Why it may be right (safety, accountability, learning)
+   - Alternative criterion proposal (if applicable)
+
+3. **Require explicit approval**
+   - If amendment approved → update criterion, then close when new criterion met
+   - If amendment rejected → criterion stands, no exceptions
+
+**Enforcement:** Weekly audit checks for issues closed with unmet criteria → flags if no criterion amendment discussion occurred.
+
+**Recovery:** Reopen issue, amend criterion through proper channel, re-close when met.
+
+**Rationale:** Success criteria are living agreements, not obstacles. Working around them perpetuates gaps. Scrutinizing them improves the system. "Let's close despite failure" undermines policy integrity. "Let's revisit this criterion" evolves it through peer review.
+
+**Example (from #114):**
+> "S4 requires 14-day false positive measurement. Before committing:
+>
+> **Arguments to amend S4:**
+> - Auto-fixes are additive-only, reversible, low-risk
+> - 14-day gate blocks closure but doesn't improve safety
+> - Could measure per 20 auto-fixes instead (faster feedback)
+>
+> **Arguments to keep S4:**
+> - Establishes baseline for auto-fix reliability
+> - Forces accountability (can't ship untested automation)
+> - Catches systemic issues early
+>
+> **Proposal:** Change S4 from '14-day measurement' to '20 auto-fixes with 0 false positives'
+>
+> **If approved:** Update S4, close #114 when new criterion met.
+> **If rejected:** S4 stands, #114 stays open until Mar 25."
+
+---
+
 ## Enforcement Matrix
 
 | Rule | Enforcement Level | Plugin Hook | Recovery |
@@ -150,6 +224,8 @@ Success criteria for #108:
 | Mirror critical infra | AUDITED | Weekly cron | Create issue, list unmirrored files |
 | Close loop on spawns | AUDITED | Weekly cron | Create issue, list orphaned spawns |
 | Don't modify HEARTBEAT.md without approval | ENFORCED | Weekly audit | Create issue, restore from backup |
+| Verify command syntax before execution | ENFORCED | `before_tool_call` (exec) | Block, require --help first |
+| **Frame exceptions as criterion amendments** | **AUDITED** | **Weekly audit** | **Reopen issue, amend criterion properly** |
 
 ---
 
@@ -201,6 +277,7 @@ api.on("before_tool_call", (event, ctx) => {
 
 | Version | Date | Change |
 |---------|------|--------|
+| 2.0 | 2026-03-11 | Added Rule #31: Frame exception proposals as criterion amendments (from #114 success criteria gap incident) |
 | 1.0 | 2026-03-08 | Initial policy created after #108 work was orphaned in gitignored directories |
 
 ---
