@@ -10,6 +10,54 @@ param(
     [switch]$Verbose
 )
 
+# Helper function for pattern recommendations (DEFINED FIRST)
+function Get-PatternRecommendation {
+    param([string]$Type)
+    
+    switch ($Type) {
+        "MEMORY_RETRIEVAL_VIOLATION" { return "Add automatic memory_search() call before write operations to memory/ files" }
+        "MEMORY_RETRIEVAL_RECOVERY" { return "Consider lowering retrieval threshold or expanding valid query patterns" }
+        "MESSAGE_VIOLATION" { return "Update signature injection or servant-mode pattern list" }
+        "SERVANT_MODE" { return "Review and expand servant-mode pattern blacklist" }
+        "BOOT_SEQUENCE_INCOMPLETE" { return "Strengthen boot sequence detection or add reminder notifications" }
+        "IDLE_WATCHDOG_STALE" { return "Reduce stale limit or add proactive §4 reminders" }
+        "IDLE_WATCHDOG_RECOVERY" { return "Consider more aggressive §4 auto-execution" }
+        default { return "Review violation context and consider threshold adjustment" }
+    }
+}
+
+# Telegram alert function - delegates to send-governance-alert.ps1 (DEFINED FIRST)
+function Send-GovernanceAlert {
+    param(
+        [string[]]$AlertReasons,
+        [double]$ComplianceRate,
+        [bool]$DriftDetected,
+        [double]$DriftPercentage,
+        [int]$TotalViolations,
+        [string]$ConfigPath
+    )
+    
+    $ScriptDir = Split-Path $PSCommandPath -Parent
+    $AlertScript = Join-Path $ScriptDir "send-governance-alert.ps1"
+    
+    if (-not (Test-Path $AlertScript)) {
+        Write-Host "  ⚠️  Alert script not found: $AlertScript" -ForegroundColor Yellow
+        return
+    }
+    
+    # Build args for alert script
+    $ReasonArgs = $AlertReasons | ForEach-Object { "'$_'" }
+    $ReasonArrayStr = "@($($ReasonArgs -join ', '))"
+    
+    & $AlertScript `
+        -AlertReasons $AlertReasons `
+        -ComplianceRate $ComplianceRate `
+        -DriftDetected $DriftDetected `
+        -DriftPercentage $DriftPercentage `
+        -TotalViolations $TotalViolations `
+        -ConfigPath $ConfigPath
+}
+
 # Load configuration
 $Config = if (Test-Path $ConfigPath) {
     Get-Content $ConfigPath | ConvertFrom-Json
@@ -105,14 +153,52 @@ if (Test-Path $ViolationsPath) {
 }
 
 $PreviousTotal = $PreviousViolations.Count
-$DriftPercentage = if ($PreviousTotal -gt 0) { ($TotalViolations - $PreviousTotal) / $PreviousTotal } else { 0 }
-$DriftDetected = $DriftPercentage -gt $DriftThreshold
 
-Write-Host "`nDrift Analysis:" -ForegroundColor $(if ($DriftDetected) { "Red" } else { "Green" })
-Write-Host "  Previous Period Violations: $PreviousTotal"
-Write-Host "  Current Period Violations: $TotalViolations"
-Write-Host "  Drift: $($DriftPercentage.ToString("P2"))"
-Write-Host "  Drift Detected: $DriftDetected (threshold: $($DriftThreshold * 100)%)"
+# COLD-START FIX: Handle case where no previous period data exists
+if ($PreviousTotal -eq 0) {
+    Write-Host "`nDrift Analysis:" -ForegroundColor Yellow
+    Write-Host "  Previous Period Violations: $PreviousTotal (COLD START - no historical data)"
+    Write-Host "  Current Period Violations: $TotalViolations"
+    Write-Host "  Drift: N/A (cannot calculate without baseline)"
+    Write-Host "  Drift Detected: false (skipped due to cold start)"
+    $DriftPercentage = 0
+    $DriftDetected = $false
+    $ColdStart = $true
+} else {
+    $DriftPercentage = ($TotalViolations - $PreviousTotal) / $PreviousTotal
+    $DriftDetected = $DriftPercentage -gt $DriftThreshold
+    $ColdStart = $false
+    
+    Write-Host "`nDrift Analysis:" -ForegroundColor $(if ($DriftDetected) { "Red" } else { "Green" })
+    Write-Host "  Previous Period Violations: $PreviousTotal"
+    Write-Host "  Current Period Violations: $TotalViolations"
+    Write-Host "  Drift: $($DriftPercentage.ToString("P2"))"
+    Write-Host "  Drift Detected: $DriftDetected (threshold: $($DriftThreshold * 100)%)"
+}
+
+# Check if alerts need to be sent (AFTER drift detection)
+$AlertNeeded = $false
+$AlertReasons = @()
+
+if ($DriftDetected) {
+    $AlertNeeded = $true
+    $AlertReasons += "Drift detected: $($DriftPercentage.ToString("P2")) increase week-over-week"
+}
+
+if ($ComplianceRate -lt 0.90) {
+    $AlertNeeded = $true
+    $AlertReasons += "Compliance rate below 90%: $($ComplianceRate.ToString("P2"))"
+}
+
+if ($AlertNeeded) {
+    Write-Host "`n⚠️  ALERT CONDITIONS MET" -ForegroundColor Red
+    foreach ($Reason in $AlertReasons) {
+        Write-Host "  - $Reason" -ForegroundColor Yellow
+    }
+    
+    # Send Telegram alert
+    Send-GovernanceAlert -AlertReasons $AlertReasons -ComplianceRate $ComplianceRate -DriftDetected $DriftDetected -DriftPercentage $DriftPercentage -TotalViolations $TotalViolations -ConfigPath $ConfigPath
+}
 
 # Identify recurring patterns (3+ occurrences)
 $Patterns = @()
@@ -186,19 +272,3 @@ if ($GenerateProposals -and $Patterns.Count -gt 0) {
 }
 
 Write-Host "`n=== Analysis Complete ===" -ForegroundColor Cyan
-
-# Helper function for pattern recommendations
-function Get-PatternRecommendation {
-    param([string]$Type)
-    
-    switch ($Type) {
-        "MEMORY_RETRIEVAL_VIOLATION" { return "Add automatic memory_search() call before write operations to memory/ files" }
-        "MEMORY_RETRIEVAL_RECOVERY" { return "Consider lowering retrieval threshold or expanding valid query patterns" }
-        "MESSAGE_VIOLATION" { return "Update signature injection or servant-mode pattern list" }
-        "SERVANT_MODE" { return "Review and expand servant-mode pattern blacklist" }
-        "BOOT_SEQUENCE_INCOMPLETE" { return "Strengthen boot sequence detection or add reminder notifications" }
-        "IDLE_WATCHDOG_STALE" { return "Reduce stale limit or add proactive §4 reminders" }
-        "IDLE_WATCHDOG_RECOVERY" { return "Consider more aggressive §4 auto-execution" }
-        default { return "Review violation context and consider threshold adjustment" }
-    }
-}
