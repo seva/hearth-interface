@@ -43,6 +43,14 @@ report OR + DS spend since last check
 if delta > $1: alert Seva
 ```
 
+## §1.5 — Governance Check (Amara)
+
+```
+powershell -File C:\Users\seval\.openclaw\workspace\protocol\scripts\amara-heartbeat.ps1
+if compliance < 50%: flag CRITICAL to Seva
+if drift > 10%: flag WARNING to Seva
+```
+
 ---
 
 ## §2 — Task Dispatch
