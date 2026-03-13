@@ -139,6 +139,14 @@ Recommendation: Review proposal #1
 
 ---
 
+## Model Assignment
+
+**Default:** `google/gemini-3-flash-preview` (flash)  
+**Rationale:** Sentinel role — deterministic metrics, not creative work. 67x cost savings vs. default.  
+**Upgrade Trigger:** If complex analysis needed (deep RCA, nuanced proposal generation)
+
+---
+
 ## Version History
 
 | Version | Date | Change |
