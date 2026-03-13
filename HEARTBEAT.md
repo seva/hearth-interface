@@ -49,11 +49,22 @@ if delta > $1: alert Seva
 
 ```
 gh issue list --state open --label P0,P1 --limit 20
+subagents list --recent 60
 
 for each issue:
     if blocked:human: skip, log
     if blocked:technical: skip, log
-    if unblocked: execute
+    if waiting: skip, log (temporal block - governance voting period, etc.)
+    if active_subagent(issue): skip, log (already working)
+    if unblocked and priority P0|P1:
+        // Verification gate:
+        // - Has clear acceptance criteria?
+        // - No blocking labels?
+        // - Not a duplicate of active work?
+        if verified_unblocked(issue):
+            EXECUTE SESSIONS_SPAWN(task=issue)
+        else:
+            flag_for_clarification(issue)
 ```
 
 ---
