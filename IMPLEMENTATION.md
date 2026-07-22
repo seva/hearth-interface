@@ -2,7 +2,7 @@
 
 ---
 
-## Phase 0: Legal Foundation
+## Phase 0: Legal Foundation (#174)
 
 - [x] Wyoming DAO LLC formation (Entity ID: 2026-001894157)
 - [x] EIN application (faxed 2026-02-12, awaiting 147C letter)
@@ -15,7 +15,7 @@
 
 ---
 
-## Phase 1: Smart Contracts
+## Phase 1: Smart Contracts (#175)
 
 - [x] Governor contract deployed (Base mainnet)
 - [x] Timelock contract deployed
@@ -28,7 +28,7 @@
 
 ---
 
-## Phase 2: Governance
+## Phase 2: Governance (#176)
 
 - [ ] Governance Proposal #1 executed (defeated — zero votes)
 - [ ] Governance Proposal #2 submitted (#171)
@@ -40,7 +40,7 @@
 
 ---
 
-## Phase 3: Banking
+## Phase 3: Banking (#177)
 
 - [ ] Mercury account approved (#17)
 - [ ] Mercury account setup (2FA, bank link, IO card)
@@ -51,7 +51,7 @@
 
 ---
 
-## Phase 4: Reg D Offering
+## Phase 4: Reg D Offering (#178)
 
 - [ ] Securities counsel retained (#48)
 - [ ] Reg D exemption analysis complete
@@ -65,7 +65,7 @@
 
 ---
 
-## Phase 5: Operations
+## Phase 5: Operations (#179)
 
 - [ ] WY Annual Report filed (#173, due Feb 1, 2027)
 - [ ] Product launch (fractional vacation homes)
